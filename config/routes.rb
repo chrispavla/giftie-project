@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :saved_gifts
   resources :gifts
   resources :wish_lists
   resources :reviews

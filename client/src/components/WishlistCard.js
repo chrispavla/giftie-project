@@ -6,7 +6,7 @@ function WishlistCard({ wishlist }) {
     <div>
       <Link className="link" to={`/wish_lists/${wishlist.id}`}>
         <h3>{wishlist.title}</h3>
-        <p>{wishlist.gifts.length} gifts</p>
+        <p>{wishlist.saved_gifts.length} gifts</p>
       </Link>
     </div>
   );

@@ -1,11 +1,18 @@
 import { withRouter } from "react-router-dom";
 import NewGiftForm from "./NewGiftForm";
-import GiftList from "./GiftList";
+import SavedGiftList from "./SavedGiftList";
 import React, { useState } from "react";
 
 function Wishlist(props) {
-  const { wishlists, history, submitNewGift, match, user, deleteWishlist } =
-    props;
+  const {
+    wishlists,
+    savedGifts,
+    history,
+    submitNewGift,
+    match,
+    user,
+    deleteWishlist,
+  } = props;
   const id = parseInt(match.params.id);
   const wishlist = wishlists.find((wishlist) => wishlist.id === id);
   const [isShown, setIsShown] = useState(false);
@@ -29,7 +36,7 @@ function Wishlist(props) {
 
   return (
     <div>
-      {wishlist.gifts.length === 0 ? (
+      {wishlist.saved_gifts.length === 0 ? (
         <div>
           <button onClick={handleGoBack}>Back to Wish Lists</button>
           <h2>{wishlist.title}</h2>
@@ -52,7 +59,7 @@ function Wishlist(props) {
           <button onClick={handleGoBack}>Back to Wish Lists</button>
           <h2>{wishlist.title}</h2>
           {wishlist.event_date ? <p>{wishlist.event_date}</p> : null}
-          <GiftList gifts={wishlist.gifts} />
+          <SavedGiftList wishlistSavedGifts={wishlist.saved_gifts} />
           <button onClick={() => handleDeleteWishList(wishlist)}>
             Delete Wish List
           </button>
