@@ -1,51 +1,45 @@
 import React, { useState } from "react";
 
-function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
-  const [giftName, setGiftName] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [linkUrl, setLinkUrl] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+function EditGiftForm({ setIsShown, isShown, savedGift }) {
+  const [giftName, setGiftName] = useState(savedGift.gift_name);
+  const [description, setDescription] = useState(savedGift.description);
+  const [price, setPrice] = useState(savedGift.price);
+  const [quantity, setQuantity] = useState(savedGift.quantity);
+  const [linkUrl, setLinkUrl] = useState(savedGift.link_url);
+  const [imageUrl, setImageUrl] = useState(savedGift.image_url);
 
-  function handleCloseNewGiftForm() {
-    setIsShown(false);
-  }
-
-  function handleSubmitNewGiftForm(e) {
+  function handleSubmitEditGiftForm(e) {
     e.preventDefault();
 
-    let newGift = {
-      gift_name: giftName,
-      description: description,
-      tags: tags,
-      price: price,
-      quantity: quantity,
-      link_url: linkUrl,
-      image_url: imageUrl,
-      user_id: user.id,
-      wish_list_id: wishlist.id,
-    };
-
-    fetch("/saved_gifts", {
-      method: "POST",
+    fetch(`/saved_gifts/${savedGift.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newGift),
+      body: JSON.stringify({
+        gift_name: giftName,
+        description: description,
+        price: price,
+        quantity: quantity,
+        link_url: linkUrl,
+        image_url: imageUrl,
+      }),
     })
       .then((res) => res.json())
-      .then((newGift) => submitNewGift(newGift));
+      .then((editedGift) => console.log(editedGift));
 
+    setIsShown(false);
+  }
+
+  function handleCloseEditGiftForm() {
     setIsShown(false);
   }
 
   return (
     <div>
-      <button onClick={handleCloseNewGiftForm}> x </button>
-      <p>Create New Gift</p>
-      <form onSubmit={handleSubmitNewGiftForm}>
+      <button onClick={handleCloseEditGiftForm}> x </button>
+      <p>Edit Gift</p>
+      <form onSubmit={handleSubmitEditGiftForm}>
         <label>Gift Name</label>
         <input
           type="text"
@@ -98,4 +92,4 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
   );
 }
 
-export default NewGiftForm;
+export default EditGiftForm;

@@ -9,12 +9,17 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import MyProfile from "./components/MyProfile";
 import Wishlist from "./components/Wishlist";
+import SavedGiftDetails from "./components/SavedGiftDetails";
 
 function App() {
   const [gifts, setGifts] = useState([]);
+  const [savedGifts, setSavedGifts] = useState([]);
   const [wishlists, setWishlists] = useState([]);
   const [user, setUser] = useState(null);
-  const [rerender, setRerender] = useState(false);
+  const [sortBy, setSortBy] = useState("");
+  const [filterOccasion, setFilterOccasion] = useState("");
+  const [filterRecipient, setFilterRecipient] = useState("");
+  // const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -28,13 +33,54 @@ function App() {
     fetch("/gifts")
       .then((res) => res.json())
       .then((giftsData) => setGifts(giftsData));
-  }, [user]);
+  }, []);
+
+  useEffect(() => {
+    fetch("/saved_gifts")
+      .then((res) => res.json())
+      .then((savedGiftsData) => setSavedGifts(savedGiftsData));
+  }, []);
 
   useEffect(() => {
     fetch("/wish_lists")
       .then((res) => res.json())
       .then((wishlists) => setWishlists(wishlists));
   }, [user]);
+
+  function setSortBySearch(value) {
+    setSortBy(value);
+  }
+
+  function setFilterByOccasion(value) {
+    setFilterOccasion(value);
+  }
+
+  function setFilterByRecipient(value) {
+    setFilterRecipient(value);
+  }
+
+  const filteredGiftsBySearchBars = gifts
+    .sort((a, b) => {
+      if (sortBy === "") return gifts;
+      else if (sortBy === "lowest") return a.price - b.price;
+      else if (sortBy === "highest") return b.price - a.price;
+    })
+    .filter((gift) => {
+      if (filterOccasion === "") {
+        return true;
+      } else return gift.tags.includes(filterOccasion.toLowerCase());
+    })
+    .filter((gift) => {
+      if (filterRecipient === "") {
+        return true;
+      } else return gift.tags.includes(filterRecipient.toLowerCase());
+    });
+
+  function handleSavedItemRender() {
+    fetch("/saved_gifts")
+      .then((res) => res.json())
+      .then(setSavedGifts);
+  }
 
   function updateGifts(updatedGift) {
     let newGifts = gifts.map((gift) => {
@@ -52,14 +98,13 @@ function App() {
   }
 
   function submitNewGift(newGiftObj) {
-    setGifts([...gifts, newGiftObj]);
+    setSavedGifts([...savedGifts, newGiftObj]);
   }
 
   function deleteWishlist(deletedWishlist) {
     setWishlists(
       wishlists.filter((wishlist) => wishlist.id !== deletedWishlist.id)
     );
-    setRerender(!rerender);
   }
 
   return (
@@ -72,19 +117,31 @@ function App() {
           </Route>
           <Route exact path="/gifts">
             <h1>Gift ideas</h1>
-            <Filter />
-            <GiftList gifts={gifts} />
+            <Filter
+              setSortBySearch={setSortBySearch}
+              setFilterByOccasion={setFilterByOccasion}
+              setFilterByRecipient={setFilterByRecipient}
+            />
+            <GiftList gifts={filteredGiftsBySearchBars} />
           </Route>
           <Route exact path="/gifts/:id">
             <GiftDetails
               gifts={gifts}
+              user={user}
               updateGifts={updateGifts}
               wishlists={wishlists}
+            />
+          </Route>
+          <Route exact path="/saved_gifts/:id">
+            <SavedGiftDetails
+              savedGifts={savedGifts}
+              handleSavedItemRender={handleSavedItemRender}
             />
           </Route>
           <Route exact path="/wish_lists/:id">
             <Wishlist
               wishlists={wishlists}
+              savedGifts={savedGifts}
               user={user}
               submitNewGift={submitNewGift}
               deleteWishlist={deleteWishlist}
