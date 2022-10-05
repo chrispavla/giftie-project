@@ -1,24 +1,106 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import GiftList from "./components/GiftList";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import GiftDetails from "./components/GiftDetails";
+import Filter from "./components/Filter";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import MyProfile from "./components/MyProfile";
+import Wishlist from "./components/Wishlist";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [gifts, setGifts] = useState([]);
+  const [wishlists, setWishlists] = useState([]);
+  const [user, setUser] = useState(null);
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
   }, []);
+
+  useEffect(() => {
+    fetch("/gifts")
+      .then((res) => res.json())
+      .then((giftsData) => setGifts(giftsData));
+  }, [user]);
+
+  useEffect(() => {
+    fetch("/wish_lists")
+      .then((res) => res.json())
+      .then((wishlists) => setWishlists(wishlists));
+  }, [user]);
+
+  function updateGifts(updatedGift) {
+    let newGifts = gifts.map((gift) => {
+      if (gift.id === updatedGift.id) {
+        return updatedGift;
+      } else {
+        return gift;
+      }
+    });
+    setGifts(newGifts);
+  }
+
+  function submitNewWishlist(newWishlistObj) {
+    setWishlists([...wishlists, newWishlistObj]);
+  }
+
+  function submitNewGift(newGiftObj) {
+    setGifts([...gifts, newGiftObj]);
+  }
+
+  function deleteWishlist(deletedWishlist) {
+    setWishlists(
+      wishlists.filter((wishlist) => wishlist.id !== deletedWishlist.id)
+    );
+    setRerender(!rerender);
+  }
 
   return (
     <BrowserRouter>
       <div className="App">
+        <NavBar user={user} setUser={setUser} />
         <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
+          <Route exact path="/">
+            <Home user={user} />
           </Route>
-          <Route path="/">
-            <h1>Page Count: {count}</h1>
+          <Route exact path="/gifts">
+            <h1>Gift ideas</h1>
+            <Filter />
+            <GiftList gifts={gifts} />
+          </Route>
+          <Route exact path="/gifts/:id">
+            <GiftDetails
+              gifts={gifts}
+              updateGifts={updateGifts}
+              wishlists={wishlists}
+            />
+          </Route>
+          <Route exact path="/wish_lists/:id">
+            <Wishlist
+              wishlists={wishlists}
+              user={user}
+              submitNewGift={submitNewGift}
+              deleteWishlist={deleteWishlist}
+            />
+          </Route>
+          <Route exact path="/signup">
+            <Signup setUser={setUser} />
+          </Route>
+          <Route exact path="/login">
+            <Login setUser={setUser} />
+          </Route>
+          <Route exact path="/myProfile">
+            <MyProfile
+              wishlists={wishlists}
+              submitNewWishlist={submitNewWishlist}
+            />
           </Route>
         </Switch>
       </div>
