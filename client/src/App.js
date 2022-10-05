@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GiftList from "./components/GiftList";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
@@ -14,8 +14,7 @@ function App() {
   const [gifts, setGifts] = useState([]);
   const [wishlists, setWishlists] = useState([]);
   const [user, setUser] = useState(null);
-
-  let history = useHistory();
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -37,6 +36,17 @@ function App() {
       .then((wishlists) => setWishlists(wishlists));
   }, [user]);
 
+  function updateGifts(updatedGift) {
+    let newGifts = gifts.map((gift) => {
+      if (gift.id === updatedGift.id) {
+        return updatedGift;
+      } else {
+        return gift;
+      }
+    });
+    setGifts(newGifts);
+  }
+
   function submitNewWishlist(newWishlistObj) {
     setWishlists([...wishlists, newWishlistObj]);
   }
@@ -49,6 +59,7 @@ function App() {
     setWishlists(
       wishlists.filter((wishlist) => wishlist.id !== deletedWishlist.id)
     );
+    setRerender(!rerender);
   }
 
   return (
@@ -65,7 +76,11 @@ function App() {
             <GiftList gifts={gifts} />
           </Route>
           <Route exact path="/gifts/:id">
-            <GiftDetails gifts={gifts} wishlists={wishlists} />
+            <GiftDetails
+              gifts={gifts}
+              updateGifts={updateGifts}
+              wishlists={wishlists}
+            />
           </Route>
           <Route exact path="/wish_lists/:id">
             <Wishlist

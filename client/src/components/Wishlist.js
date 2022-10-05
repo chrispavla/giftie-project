@@ -68,16 +68,6 @@ function Wishlist(props) {
         </div>
       )}
     </div>
-
-    // <div>
-    //   <button onClick={handleGoBack}>Back to Wish Lists</button>
-    //   <h2>{wishlist.title}</h2>
-    //   {wishlist.event_date ? <p>{wishlist.event_date}</p> : null}
-    //   <GiftList gifts={wishlist.gifts} />
-    //   <button onClick={handleDeleteWishList}>Delete Wish List</button>
-    //   <button onClick={handleShowNewGiftForm}>Add a Gift</button>
-    //   {isShown ? <NewGiftForm setIsShown={setIsShown} /> : null}
-    // </div>
   );
 }
 export default withRouter(Wishlist);

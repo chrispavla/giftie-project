@@ -17,6 +17,12 @@ class GiftsController < ApplicationController
     render json: gift, status: :created
   end
 
+  def update 
+    gift = Gift.find(params[:id])
+    gift.update!(gift_params)
+    render json: gift, status: :accepted
+  end
+
   private 
 
   def gift_params 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddToWishList({ gift, wishlists }) {
+function AddToWishList({ gift, wishlists, updateGifts }) {
   const [foundWishlist, setFoundWishlist] = useState([]);
 
   function handleChangeWishlists(e) {
@@ -12,6 +12,19 @@ function AddToWishList({ gift, wishlists }) {
 
   function handleSaveGiftToSelectedWishlist() {
     // take the gift and assign it to the found wishlist
+    // make a patch request to the gift and change its wishlist_id to the current one
+    fetch(`/gifts/${gift.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        wish_list_id: foundWishlist.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((gift) => updateGifts(gift));
+    alert("Gift saved to your wishlist!");
   }
 
   return (

@@ -20,9 +20,6 @@ function NavBar({ setUser, user }) {
           <NavLink exact to="/">
             Home
           </NavLink>
-          <NavLink exact to="/gifts">
-            Gift Ideas
-          </NavLink>
           <NavLink exact to="/login">
             Log in
           </NavLink>
