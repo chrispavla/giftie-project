@@ -29,20 +29,48 @@ function SavedGiftDetails(props) {
 
   return (
     <div>
-      <button onClick={handleGoBack}>Back to the Wish list</button>
-      <img src={savedGift.image_url}></img>
-      <h2>{savedGift.gift_name}</h2>
-      <p>$ {savedGift.price}</p>
-      {savedGift.link_url ? <a href={savedGift.link_url}>Buy here</a> : null}
-      <button onClick={handleDeleteGiftFromWishList}>Remove a Gift</button>
-      <button onClick={handleShowEditGiftForm}>Edit Gift</button>
-      {isShown ? (
-        <EditGiftForm
-          setIsShown={setIsShown}
-          isShown={isShown}
-          savedGift={savedGift}
-        />
-      ) : null}
+      <button className="buttonbackk" onClick={handleGoBack}>
+        Back to the Wish list
+      </button>
+      <div class="card mb-3 cardd">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              class="img-fluid rounded-start"
+              src={savedGift.image_url}
+            ></img>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2>{savedGift.gift_name}</h2>
+              <p>$ {savedGift.price}</p>
+              {savedGift.link_url ? (
+                <a className="buyhere" href={savedGift.link_url}>
+                  Buy here
+                </a>
+              ) : null}
+              <div className="giftbuttons">
+                <button className="editbutton" onClick={handleShowEditGiftForm}>
+                  Edit Gift
+                </button>
+                <button
+                  className="removebutton"
+                  onClick={handleDeleteGiftFromWishList}
+                >
+                  Remove a Gift
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {isShown ? (
+          <EditGiftForm
+            setIsShown={setIsShown}
+            isShown={isShown}
+            savedGift={savedGift}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

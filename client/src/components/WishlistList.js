@@ -6,7 +6,7 @@ function WishlistList({ wishlists }) {
     <WishlistCard key={wishlist.id} wishlist={wishlist} />
   ));
 
-  return <div>{wishlistsToDisplay}</div>;
+  return <div className="wishlistcard">{wishlistsToDisplay}</div>;
 }
 
 export default WishlistList;

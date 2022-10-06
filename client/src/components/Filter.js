@@ -18,28 +18,42 @@ function Filter({
   }
 
   return (
-    <div>
-      <label>Sort By:</label>
-      <select onChange={handleSortByPriceChange}>
-        <option></option>
-        {/* <option>Top Rated</option> */}
-        <option value="lowest">Lowest Price</option>
-        <option value="highest">Highest price</option>
-      </select>
-      <label>Filter By Occasion:</label>
-      <select onChange={handleFilterByOccasion}>
-        <option></option>
-        <option>Christmas</option>
-        <option>Birthday</option>
-      </select>
-      <label>Filter By Recipient:</label>
-      <select onChange={handleFilterByRecipient}>
-        <option></option>
-        <option>Women</option>
-        <option>Men</option>
-        <option>Pets</option>
-        <option>Kids</option>
-      </select>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        marginTop: "20px",
+        marginBottom: "20px",
+        alignItems: "center",
+      }}
+    >
+      <div>
+        <label className="mx-2">Sort By:</label>
+        <select onChange={handleSortByPriceChange}>
+          <option></option>
+          {/* <option>Top Rated</option> */}
+          <option value="lowest">Lowest Price</option>
+          <option value="highest">Highest price</option>
+        </select>
+      </div>
+      <div>
+        <label className="mx-2">Filter By Occasion:</label>
+        <select onChange={handleFilterByOccasion}>
+          <option></option>
+          <option>Christmas</option>
+          <option>Birthday</option>
+        </select>
+      </div>
+      <div>
+        <label className="mx-2">Filter By Recipient:</label>
+        <select onChange={handleFilterByRecipient}>
+          <option></option>
+          <option>Women</option>
+          <option>Men</option>
+          <option>Pets</option>
+          <option>Kids</option>
+        </select>
+      </div>
     </div>
   );
 }

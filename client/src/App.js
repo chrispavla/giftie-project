@@ -116,7 +116,7 @@ function App() {
             <Home user={user} />
           </Route>
           <Route exact path="/gifts">
-            <h1>Gift ideas</h1>
+            <h1 className="giftideas">Gift ideas</h1>
             <Filter
               setSortBySearch={setSortBySearch}
               setFilterByOccasion={setFilterByOccasion}
@@ -157,6 +157,7 @@ function App() {
             <MyProfile
               wishlists={wishlists}
               submitNewWishlist={submitNewWishlist}
+              user={user}
             />
           </Route>
         </Switch>

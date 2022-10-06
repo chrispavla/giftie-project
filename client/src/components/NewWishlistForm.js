@@ -44,35 +44,44 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
 
   return (
     <div>
-      <button onClick={handleCloseNewWishlistForm}> x </button>
-      <p>Create New Wish list</p>
-      <form onSubmit={handleSubmitNewWishlistForm}>
-        <label>Wish List Name</label>
-        <input
-          type="text"
-          name="wishlist-name"
-          placeholder="Mom's 65th Birthday"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        ></input>
-        <label>Event Date</label>
-        <input
-          name="event-date"
-          type="date"
-          value={eventDate}
-          onChange={(e) => setEventDate(e.target.value)}
-        ></input>
-        <label>Description</label>
-        <input
-          name="description"
-          type="text"
-          placeholder="Some ideas for birthday"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        ></input>
-        <button>Create List</button>
-        {error ? error.map((err) => <div>{err}</div>) : null}
+      <button className="buttonx" onClick={handleCloseNewWishlistForm}>
+        {" "}
+        x{" "}
+      </button>
+      <p className="createnew">Create New Wish list</p>
+      <form className="wishlistForm" onSubmit={handleSubmitNewWishlistForm}>
+        <div>
+          <label>Wish List Name</label>
+          <input
+            type="text"
+            name="wishlist-name"
+            placeholder="Mom's 65th Birthday"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Event Date</label>
+          <input
+            name="event-date"
+            type="date"
+            value={eventDate}
+            onChange={(e) => setEventDate(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Description</label>
+          <input
+            name="description"
+            type="text"
+            placeholder="Some ideas for birthday"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          ></input>
+        </div>
       </form>
+      <button className="button">Create List</button>
+      {error ? error.map((err) => <div>{err}</div>) : null}
     </div>
   );
 }

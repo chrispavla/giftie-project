@@ -46,35 +46,61 @@ function Login({ setUser }) {
   }
 
   return (
-    <div>
-      <h3>Login</h3>
+    <div class="text-center">
+      <h3 className="loginh">Login</h3>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={password}
-            id="myInput"
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </label>
-        <input type="checkbox" onClick={handleShowPassword} />
-        <label>Show Password</label>
-        <button type="submit">{isLoading ? "Loading..." : "Login"}</button>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1">
+            Username
+            <input
+              id="form2Example1"
+              class="form-control"
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+          </label>
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example2">
+            Password
+            <input
+              id="form2Example2"
+              class="form-control"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </label>
+        </div>
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="form2Example31"
+                onClick={handleShowPassword}
+              />
+              <label class="form-check-label" for="form2Example31">
+                Show Password
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="buttonlogin" type="submit">
+          {isLoading ? "Loading..." : "Login"}
+        </button>
       </form>
       {error ? <div>{error}</div> : null}
-      <p>Don't have an account?</p>
-      <a href="/signup">Sign up</a>
+      <div class="text-center account">
+        <p>Don't have an account?</p>
+        <a className="signup" href="/signup">
+          Sign up
+        </a>
+      </div>
     </div>
   );
 }
