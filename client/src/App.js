@@ -45,7 +45,7 @@ function App() {
     fetch("/wish_lists")
       .then((res) => res.json())
       .then((wishlists) => setWishlists(wishlists));
-  }, [user]);
+  }, []);
 
   function setSortBySearch(value) {
     setSortBy(value);

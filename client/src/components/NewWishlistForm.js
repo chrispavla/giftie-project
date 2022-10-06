@@ -4,6 +4,7 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
+  const [error, setError] = useState();
 
   function handleCloseNewWishlistForm() {
     setIsShown(false);
@@ -24,15 +25,21 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newWishlist),
-    })
-      .then((res) => res.json())
-      .then((newWishlist) => submitNewWishlist(newWishlist));
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((newWishlist) => {
+          submitNewWishlist(newWishlist);
+          setIsShown(false);
+        });
+      } else {
+        res.json().then((error) => setError(error.errors));
+      }
+    });
+    // .then((newWishlist) => submitNewWishlist(newWishlist));
 
     setTitle("");
     setEventDate("");
     setNote("");
-
-    setIsShown(false);
   }
 
   return (
@@ -64,6 +71,7 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
           onChange={(e) => setNote(e.target.value)}
         ></input>
         <button>Create List</button>
+        {error ? error.map((err) => <div>{err}</div>) : null}
       </form>
     </div>
   );

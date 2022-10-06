@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
   const [giftName, setGiftName] = useState("");
@@ -9,6 +10,8 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
   const [linkUrl, setLinkUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState();
+
+  let history = useHistory();
 
   function handleCloseNewGiftForm() {
     setIsShown(false);
