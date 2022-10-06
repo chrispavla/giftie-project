@@ -5,6 +5,7 @@ function Signup({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   let history = useHistory();
 
@@ -30,7 +31,7 @@ function Signup({ setUser }) {
         r.json().then((user) => setUser(user));
         history.push("/");
       } else {
-        r.json().then(console.log("error"));
+        r.json().then((data) => setError(Object.values(data).join()));
       }
     });
   }
@@ -71,6 +72,7 @@ function Signup({ setUser }) {
         <label>Show Password</label>
         <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
       </form>
+      {error ? <div>{error}</div> : null}
       <p>Already registered?</p>
       <a href="/login">Log in</a>
     </div>

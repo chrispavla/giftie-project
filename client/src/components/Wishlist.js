@@ -16,6 +16,7 @@ function Wishlist(props) {
   const id = parseInt(match.params.id);
   const wishlist = wishlists.find((wishlist) => wishlist.id === id);
   const [isShown, setIsShown] = useState(false);
+  // const [rerender, setRerender] = useState(false);
 
   function handleShowNewGiftForm() {
     setIsShown(true);

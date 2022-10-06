@@ -8,6 +8,7 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
   const [quantity, setQuantity] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState();
 
   function handleCloseNewGiftForm() {
     setIsShown(false);
@@ -34,11 +35,17 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newGift),
-    })
-      .then((res) => res.json())
-      .then((newGift) => submitNewGift(newGift));
-
-    setIsShown(false);
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          submitNewGift(data);
+          alert("Gift has been added to your wishlist!");
+          setIsShown(false);
+        });
+      } else {
+        res.json().then((error) => setError(error.errors));
+      }
+    });
   }
 
   return (
@@ -93,6 +100,7 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
           onChange={(e) => setImageUrl(e.target.value)}
         ></input>
         <button>Save Gift</button>
+        {error ? error.map((err) => <div>{err}</div>) : null}
       </form>
     </div>
   );
