@@ -42,6 +42,9 @@ function Filter({
           <option></option>
           <option>Christmas</option>
           <option>Birthday</option>
+          <option>Anniversary</option>
+          <option>Baby Shower</option>
+          <option>House Warming</option>
         </select>
       </div>
       <div>

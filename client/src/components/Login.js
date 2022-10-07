@@ -63,10 +63,10 @@ function Login({ setUser }) {
           </label>
         </div>
         <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example2">
+          <label class="form-label" for="myInput">
             Password
             <input
-              id="form2Example2"
+              id="myInput"
               class="form-control"
               type="password"
               name="password"
@@ -77,17 +77,21 @@ function Login({ setUser }) {
         </div>
         <div class="row mb-4">
           <div class="col d-flex justify-content-center">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="form2Example31"
-                onClick={handleShowPassword}
-              />
-              <label class="form-check-label" for="form2Example31">
-                Show Password
-              </label>
-            </div>
+            {/* <div class="form-check"> */}
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="form2Example31"
+              onClick={handleShowPassword}
+            />
+            <label
+              style={{ marginLeft: "10px" }}
+              class="form-check-label"
+              for="form2Example31"
+            >
+              Show Password
+            </label>
+            {/* </div> */}
           </div>
         </div>
         <button class="buttonlogin" type="submit">

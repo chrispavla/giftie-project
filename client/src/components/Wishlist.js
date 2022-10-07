@@ -32,7 +32,8 @@ function Wishlist(props) {
     })
       .then((res) => res.json())
       .then((deletedWishlist) => deleteWishlist(deletedWishlist));
-    history.push("/");
+    history.push("/myProfile");
+    window.location.reload();
   }
 
   return (
@@ -54,7 +55,9 @@ function Wishlist(props) {
           {wishlist.event_date ? (
             <p className="wishlistitle">{wishlist.event_date}</p>
           ) : null}
-          <button onClick={handleShowNewGiftForm}>Add a Gift</button>
+          <button className="button" onClick={handleShowNewGiftForm}>
+            Add a Gift
+          </button>
           {isShown ? (
             <NewGiftForm
               user={user}

@@ -43,9 +43,16 @@ function AddToWishList({ gift, wishlists, user, isShown, setIsShown }) {
 
   return (
     <div>
-      <h1>Add to wishlist</h1>
-      <h3>{gift.gift_name}</h3>
-      <select onChange={(e) => handleChangeWishlists(e)}>
+      <button
+        className="savegiftbutton"
+        onClick={handleSaveGiftToSelectedWishlist}
+      >
+        Save Gift
+      </button>
+      <select
+        className="selectwishlist"
+        onChange={(e) => handleChangeWishlists(e)}
+      >
         <option value="Select Wishlist">Select Wishlist</option>
         {wishlists.map((wishlist) => (
           <option key={wishlist.id} value={wishlist.title}>
@@ -53,7 +60,6 @@ function AddToWishList({ gift, wishlists, user, isShown, setIsShown }) {
           </option>
         ))}
       </select>
-      <button onClick={handleSaveGiftToSelectedWishlist}>Save Gift</button>
     </div>
   );
 }

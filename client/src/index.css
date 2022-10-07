@@ -184,6 +184,30 @@ code {
   margin-right: auto;
 }
 
+.selectwishlist {
+  margin-left: 35rem;
+  margin-right: auto;
+  margin-top: -20px;
+}
+
+.errors {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.savegiftbutton {
+  background-color: #8c4c65;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  margin-bottom: -20px;
+  border-radius: 12px;
+  border: none;
+  margin-left: 50rem;
+}
+
 .signup {
   text-decoration: none;
   color: #8c4c65;
@@ -231,6 +255,11 @@ code {
 }
 
 .giftformm {
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+.wishlistForm {
   margin-left: 10rem;
   margin-right: 10rem;
 }
@@ -407,13 +436,14 @@ nav a:active {
 }
 
 .tag {
-  margin: 7px 0;
-  margin-right: 10px;
+  margin: 5px 0;
+  margin-right: 25px;
   padding: 0 10px;
   padding-right: 5px;
-  border: 1px solid orange;
+  border: 1px solid #8c4c65;
   border-radius: 5px;
-  background-color: orange;
+  background-color: #8c4c65;
   white-space: nowrap;
   color: white;
+  width: auto;
 }

@@ -49,10 +49,14 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
         x{" "}
       </button>
       <p className="createnew">Create New Wish list</p>
-      <form className="wishlistForm" onSubmit={handleSubmitNewWishlistForm}>
-        <div>
-          <label>Wish List Name</label>
+      <form className="giftformm" onSubmit={handleSubmitNewWishlistForm}>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">
+            Wish List Name
+          </label>
           <input
+            class="form-control"
+            id="exampleInputEmail1"
             type="text"
             name="wishlist-name"
             placeholder="Mom's 65th Birthday"
@@ -60,18 +64,26 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
             onChange={(e) => setTitle(e.target.value)}
           ></input>
         </div>
-        <div>
-          <label>Event Date</label>
+        <div class="mb-3">
+          <label for="eventdate" class="form-label">
+            Event Date
+          </label>
           <input
+            class="form-control"
+            id="eventdate"
             name="event-date"
             type="date"
             value={eventDate}
             onChange={(e) => setEventDate(e.target.value)}
           ></input>
         </div>
-        <div>
-          <label>Description</label>
+        <div class="mb-3">
+          <label for="description" class="form-label">
+            Description
+          </label>
           <input
+            class="form-control"
+            id="description"
             name="description"
             type="text"
             placeholder="Some ideas for birthday"
@@ -79,9 +91,11 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
             onChange={(e) => setNote(e.target.value)}
           ></input>
         </div>
+        {error ? error.map((err) => <div className="errors">{err}</div>) : null}
+        <button type="submit" className="button">
+          Create List
+        </button>
       </form>
-      <button className="button">Create List</button>
-      {error ? error.map((err) => <div>{err}</div>) : null}
     </div>
   );
 }

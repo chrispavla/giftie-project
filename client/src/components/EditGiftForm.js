@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditGiftForm({ setIsShown, isShown, savedGift }) {
+function EditGiftForm({ setIsShown, setSavedGifts, savedGift }) {
   const [giftName, setGiftName] = useState(savedGift.gift_name);
   const [description, setDescription] = useState(savedGift.description);
   const [price, setPrice] = useState(savedGift.price);

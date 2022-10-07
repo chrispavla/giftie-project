@@ -45,7 +45,7 @@ function App() {
     fetch("/wish_lists")
       .then((res) => res.json())
       .then((wishlists) => setWishlists(wishlists));
-  }, []);
+  }, [user]);
 
   function setSortBySearch(value) {
     setSortBy(value);
@@ -136,6 +136,7 @@ function App() {
             <SavedGiftDetails
               savedGifts={savedGifts}
               handleSavedItemRender={handleSavedItemRender}
+              setSavedGifts={setSavedGifts}
             />
           </Route>
           <Route exact path="/wish_lists/:id">
