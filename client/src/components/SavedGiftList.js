@@ -11,7 +11,11 @@ function SavedGiftList({ wishlistSavedGifts }) {
     )
   );
 
-  return <div>{wishlistSavedGiftsToDisplay}</div>;
+  return (
+    <div class="row row-cols-3 row-cols-md-4 g-4">
+      {wishlistSavedGiftsToDisplay}
+    </div>
+  );
 }
 
 export default SavedGiftList;

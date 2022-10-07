@@ -53,56 +53,95 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
 
   return (
     <div>
-      <button onClick={handleCloseNewGiftForm}> x </button>
-      <p>Create New Gift</p>
-      <form onSubmit={handleSubmitNewGiftForm}>
-        <label>Gift Name</label>
-        <input
-          type="text"
-          name="gift-name"
-          placeholder="Quilted Jersey Robe"
-          value={giftName}
-          onChange={(e) => setGiftName(e.target.value)}
-        ></input>
-        <label>Link</label>
-        <input
-          name="giftLink"
-          type="text"
-          placeholder="https://huckberry.com/store/wellen/category/p/71976-quilted-jersey-robe?utm_medium=affiliate&utm_source=giftful.com&clickref=1011lwc9H5X4&utm_content=partnerize"
-          value={linkUrl}
-          onChange={(e) => setLinkUrl(e.target.value)}
-        ></input>
-        <label>Price</label>
-        <input
-          name="price"
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        ></input>
-        <label>Quantity</label>
-        <input
-          name="quantity"
-          type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        ></input>
-        <label>Gift Details</label>
-        <input
-          name="giftDetails"
-          type="text"
-          placeholder="For example: 'medium size', 'the red one'"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></input>
-        <label>Add Image Link</label>
-        <input
-          name="imagelink"
-          type="text"
-          placeholder="Image url.."
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        ></input>
-        <button>Save Gift</button>
+      <button className="buttonx" onClick={handleCloseNewGiftForm}>
+        {" "}
+        x{" "}
+      </button>
+      <p className="createnew">Create New Gift</p>
+      <form className="giftformm" onSubmit={handleSubmitNewGiftForm}>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">
+            Gift Name
+          </label>
+          <input
+            class="form-control"
+            id="exampleInputEmail1"
+            type="text"
+            name="gift-name"
+            placeholder="Quilted Jersey Robe"
+            value={giftName}
+            onChange={(e) => setGiftName(e.target.value)}
+          ></input>
+        </div>
+        <div class="mb-3">
+          <label for="link" class="form-label">
+            Link
+          </label>
+          <input
+            id="link"
+            class="form-control"
+            name="giftLink"
+            type="text"
+            placeholder="https://huckberry.com/store/wellen/category/p/71976-quilted-jersey-robe?utm_medium=affiliate&utm_source=giftful.com&clickref=1011lwc9H5X4&utm_content=partnerize"
+            value={linkUrl}
+            onChange={(e) => setLinkUrl(e.target.value)}
+          ></input>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">
+            Price
+          </label>
+          <input
+            id="price"
+            class="form-control"
+            name="price"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          ></input>
+        </div>
+        <div class="mb-3">
+          <label for="quantity" class="form-label">
+            Quantity
+          </label>
+          <input
+            id="quantity"
+            class="form-control"
+            name="quantity"
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          ></input>
+        </div>
+        <div class="mb-3">
+          <label for="giftDetails" class="form-label">
+            Gift Details
+          </label>
+          <input
+            id="giftDetails"
+            class="form-control"
+            name="giftDetails"
+            type="text"
+            placeholder="For example: 'medium size', 'the red one'"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></input>
+        </div>
+        <div class="mb-3">
+          <label for="imagelink" class="form-label">
+            Add Image Link
+          </label>
+          <input
+            id="imagelink"
+            class="form-control"
+            name="imagelink"
+            type="text"
+            placeholder="Image url.."
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          ></input>
+        </div>
+        <button className="buttongift">Save Gift</button>
         {error ? error.map((err) => <div>{err}</div>) : null}
       </form>
     </div>

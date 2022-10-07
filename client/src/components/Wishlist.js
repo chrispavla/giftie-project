@@ -32,20 +32,32 @@ function Wishlist(props) {
     })
       .then((res) => res.json())
       .then((deletedWishlist) => deleteWishlist(deletedWishlist));
-    history.push("/");
+    history.push("/myProfile");
+    window.location.reload();
   }
 
   return (
     <div>
       {wishlist.saved_gifts.length === 0 ? (
         <div>
-          <button onClick={handleGoBack}>Back to Wish Lists</button>
-          <h2>{wishlist.title}</h2>
-          {wishlist.event_date ? <p>{wishlist.event_date}</p> : null}
-          <button onClick={() => handleDeleteWishList(wishlist)}>
-            Delete Wish List
+          <div className="buttonslisst">
+            <button className="buttonback" onClick={handleGoBack}>
+              Back to Wish Lists
+            </button>
+            <button
+              className="buttonback"
+              onClick={() => handleDeleteWishList(wishlist)}
+            >
+              Delete Wish List
+            </button>
+          </div>
+          <h2 className="wishlistitle">{wishlist.title}</h2>
+          {wishlist.event_date ? (
+            <p className="wishlistitle">{wishlist.event_date}</p>
+          ) : null}
+          <button className="button" onClick={handleShowNewGiftForm}>
+            Add a Gift
           </button>
-          <button onClick={handleShowNewGiftForm}>Add a Gift</button>
           {isShown ? (
             <NewGiftForm
               user={user}
@@ -57,14 +69,25 @@ function Wishlist(props) {
         </div>
       ) : (
         <div>
-          <button onClick={handleGoBack}>Back to Wish Lists</button>
-          <h2>{wishlist.title}</h2>
-          {wishlist.event_date ? <p>{wishlist.event_date}</p> : null}
+          <div className="buttonslisst">
+            <button className="buttonback" onClick={handleGoBack}>
+              Back to Wish Lists
+            </button>
+            <button
+              className="buttonback"
+              onClick={() => handleDeleteWishList(wishlist)}
+            >
+              Delete Wish List
+            </button>
+          </div>
+          <h2 className="wishlistitle">{wishlist.title}</h2>
+          {wishlist.event_date ? (
+            <p className="wishlistitle">{wishlist.event_date}</p>
+          ) : null}
           <SavedGiftList wishlistSavedGifts={wishlist.saved_gifts} />
-          <button onClick={() => handleDeleteWishList(wishlist)}>
-            Delete Wish List
+          <button className="button" onClick={handleShowNewGiftForm}>
+            Add a Gift
           </button>
-          <button onClick={handleShowNewGiftForm}>Add a Gift</button>
           {isShown ? (
             <NewGiftForm
               user={user}

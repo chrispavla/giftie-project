@@ -46,35 +46,62 @@ function Signup({ setUser }) {
   }
 
   return (
-    <div>
-      <h3>Signup</h3>
+    <div class="text-center">
+      <h3 className="loginh">Signup</h3>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={password}
-            id="myInput"
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </label>
-        <input type="checkbox" onClick={handleShowPassword} />
-        <label>Show Password</label>
-        <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1">
+            Username
+            <input
+              id="form2Example1"
+              class="form-control"
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+          </label>
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example2">
+            Password
+            <input
+              id="form2Example2"
+              class="form-control"
+              type="password"
+              name="password"
+              value={password}
+              id="myInput"
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </label>
+        </div>
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                id="form2Example31"
+                type="checkbox"
+                onClick={handleShowPassword}
+              />
+              <label class="form-check-label" for="form2Example31">
+                Show Password
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="buttonlogin" type="submit">
+          {isLoading ? "Loading..." : "Sign Up"}
+        </button>
       </form>
       {error ? <div>{error}</div> : null}
-      <p>Already registered?</p>
-      <a href="/login">Log in</a>
+      <div class="text-center account">
+        <p>Already registered?</p>
+        <a className="signup" href="/login">
+          Log in
+        </a>
+      </div>
     </div>
   );
 }

@@ -19,22 +19,42 @@ function GiftDetails(props) {
 
   return (
     <div>
-      <button onClick={handleGoBack}>Back to Gift Ideas</button>
-      <img src={gift.image_url}></img>
-      <h2>{gift.gift_name}</h2>
-      <p>{gift.price}</p>
-      {gift.link_url ? <a href={gift.link_url}>Buy here</a> : null}
-      <button onClick={handleAddToWishlist}>Add to Wishlist</button>
-      {isShown ? (
-        <AddToWishList
-          updateGifts={updateGifts}
-          gift={gift}
-          user={user}
-          wishlists={wishlists}
-          setIsShown={setIsShown}
-          isShown={isShown}
-        />
-      ) : null}
+      <button className="buttonbackk" onClick={handleGoBack}>
+        Back to Gift Ideas
+      </button>
+      <div class="card mb-3 cardd">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="img-fluid rounded-start" src={gift.image_url}></img>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2>{gift.gift_name}</h2>
+              <p>$ {gift.price}</p>
+              {gift.link_url ? (
+                <a className="buyhere" href={gift.link_url}>
+                  Buy here
+                </a>
+              ) : null}
+              <div className="giftbuttons">
+                <button className="editbutton" onClick={handleAddToWishlist}>
+                  Add to Wishlist
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {isShown ? (
+          <AddToWishList
+            updateGifts={updateGifts}
+            gift={gift}
+            user={user}
+            wishlists={wishlists}
+            setIsShown={setIsShown}
+            isShown={isShown}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

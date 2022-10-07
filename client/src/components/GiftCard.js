@@ -4,23 +4,29 @@ import GiftImage from "../gift_image.jpg";
 
 function GiftCard({ gift }) {
   const tagsToDisplay = gift.tags.map((tag) => (
-    <div key={tag.id} className="tag">
+    <div key={tag.id} className="tag card-text">
       {tag}
     </div>
   ));
 
   return (
-    <div>
-      <Link className="link" to={`/gifts/${gift.id}`}>
-        <h3>{gift.gift_name}</h3>
-        {tagsToDisplay}
-        <h4>${gift.price}</h4>
-        {gift.image_url ? (
-          <img src={gift.image_url} />
-        ) : (
-          <img src={GiftImage} />
-        )}
-      </Link>
+    <div class="col">
+      <div class="card h-100">
+        <Link className="link" to={`/gifts/${gift.id}`}>
+          {gift.image_url ? (
+            <img class="card-img-top" src={gift.image_url} />
+          ) : (
+            <img class="card-img-top" src={GiftImage} />
+          )}
+        </Link>
+        <div class="card-body">
+          <h3 class="card-title">{gift.gift_name}</h3>
+          {tagsToDisplay}
+        </div>
+        <div class="card-footer">
+          <p>${gift.price}</p>
+        </div>
+      </div>
     </div>
   );
 }

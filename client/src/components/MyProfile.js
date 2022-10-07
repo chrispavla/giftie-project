@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NewWishListForm from "./NewWishlistForm";
 import WishlistList from "./WishlistList";
 
-function MyProfile({ submitNewWishlist, wishlists }) {
+function MyProfile({ submitNewWishlist, wishlists, user }) {
   const [isShown, setIsShown] = useState(false);
 
   function handleOpenNewWishlistForm() {
@@ -11,9 +11,12 @@ function MyProfile({ submitNewWishlist, wishlists }) {
 
   return (
     <div>
-      <h1>My Profile</h1>
+      <h1 className="myprofilename">My Profile</h1>
+      <p className="numberofwishlists">{wishlists.length} Wishlists</p>
       <WishlistList wishlists={wishlists} />
-      <button onClick={handleOpenNewWishlistForm}>+ New Wish List</button>
+      <button className="button" onClick={handleOpenNewWishlistForm}>
+        + New Wish List
+      </button>
       {isShown && (
         <NewWishListForm
           setIsShown={setIsShown}
