@@ -1,13 +1,23 @@
 import { withRouter } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddToWishList from "./AddToWishList";
+import { useHistory, useParams } from "react-router-dom";
 
-function GiftDetails(props) {
-  const { gifts, history, user, updateGifts, wishlists, match } = props;
-  const id = parseInt(match.params.id);
-  const gift = gifts.find((gift) => gift.id === id);
+function GiftDetails({ updateGifts, wishlists }) {
   const [isShown, setIsShown] = useState(false);
-  // const [rerender, setRerender] = useState(false);
+  const [gift, setGift] = useState([]);
+  let { id } = useParams();
+  let history = useHistory();
+
+  useEffect(() => {
+    fetch(`/gifts/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setGift(data);
+        });
+      }
+    });
+  }, [id]);
 
   function handleGoBack() {
     history.goBack();
@@ -48,7 +58,6 @@ function GiftDetails(props) {
           <AddToWishList
             updateGifts={updateGifts}
             gift={gift}
-            user={user}
             wishlists={wishlists}
             setIsShown={setIsShown}
             isShown={isShown}

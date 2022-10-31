@@ -1,9 +1,13 @@
 import React from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../Context/UserProvider";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import logo from "../logo.png";
 
-function NavBar({ setUser, user }) {
+function NavBar() {
+  let [user, setUser] = useContext(UserContext);
+
   let history = useHistory();
 
   const handleLogout = () => {

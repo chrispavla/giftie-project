@@ -1,7 +1,11 @@
 import * as React from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../Context/UserProvider";
 import biglogo from "../biglogo.png";
 
-function Home({ user }) {
+function Home() {
+  let [user, setUser] = useContext(UserContext);
+
   return (
     <div className="home">
       <div className="ldiv">
