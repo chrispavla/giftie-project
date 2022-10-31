@@ -4,7 +4,7 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   function handleCloseNewWishlistForm() {
     setIsShown(false);

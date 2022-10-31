@@ -1,15 +1,23 @@
-import { withRouter } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditGiftForm from "./EditGiftForm";
 import GiftImage from "../gift_image.jpg";
+import { useHistory, useParams } from "react-router-dom";
 
-function SavedGiftDetails(props) {
-  const { savedGifts, setSavedGifts, history, handleSavedItemRender, match } =
-    props;
-  const id = parseInt(match.params.id);
-  const savedGift = savedGifts.find((savedGift) => savedGift.id === id);
-  // const [rerender, setRerender] = useState(false);
+function SavedGiftDetails(handleSavedItemRender) {
   const [isShown, setIsShown] = useState(false);
+  const [savedGift, setSavedGift] = useState([]);
+  let { id } = useParams();
+  let history = useHistory();
+
+  useEffect(() => {
+    fetch(`/saved_gifts/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setSavedGift(data);
+        });
+      }
+    });
+  }, [id]);
 
   function handleGoBack() {
     history.goBack();
@@ -22,7 +30,7 @@ function SavedGiftDetails(props) {
       .then((res) => res.json())
       .then(handleSavedItemRender);
     alert("Gift removed from your wishlist!");
-    history.push("/myProfile");
+    history.goBack();
   }
 
   function handleShowEditGiftForm() {
@@ -68,7 +76,7 @@ function SavedGiftDetails(props) {
         </div>
         {isShown ? (
           <EditGiftForm
-            setSavedGifts={setSavedGifts}
+            setSavedGift={setSavedGift}
             setIsShown={setIsShown}
             isShown={isShown}
             savedGift={savedGift}
@@ -79,4 +87,4 @@ function SavedGiftDetails(props) {
   );
 }
 
-export default withRouter(SavedGiftDetails);
+export default SavedGiftDetails;

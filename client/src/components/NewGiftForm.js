@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../Context/UserProvider";
 
-function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
+function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
   const [giftName, setGiftName] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
@@ -9,7 +10,8 @@ function NewGiftForm({ setIsShown, user, wishlist, submitNewGift }) {
   const [quantity, setQuantity] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
+  let [user, setUser] = useContext(UserContext);
 
   let history = useHistory();
 

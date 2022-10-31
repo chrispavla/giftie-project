@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import NewWishListForm from "./NewWishlistForm";
 import WishlistList from "./WishlistList";
+import { WishlistsContext } from "../Context/WishlistsProvider";
 
-function MyProfile({ submitNewWishlist, wishlists, user }) {
-  const [isShown, setIsShown] = useState(false);
-
-  function handleOpenNewWishlistForm() {
-    setIsShown(true);
-  }
+function MyProfile() {
+  let [wishlists, setWishlists] = useContext(WishlistsContext);
 
   return (
     <div>
       <h1 className="myprofilename">My Profile</h1>
       <p className="numberofwishlists">{wishlists.length} Wishlists</p>
-      <WishlistList wishlists={wishlists} />
-      <button className="button" onClick={handleOpenNewWishlistForm}>
-        + New Wish List
-      </button>
-      {isShown && (
-        <NewWishListForm
-          setIsShown={setIsShown}
-          submitNewWishlist={submitNewWishlist}
-        />
-      )}
+      <WishlistList />
     </div>
   );
 }

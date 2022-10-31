@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../Context/UserProvider";
 import { useHistory } from "react-router-dom";
 
-function Signup({ setUser }) {
+function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
+
+  let [user, setUser] = useContext(UserContext);
 
   let history = useHistory();
 

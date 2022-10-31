@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../Context/UserProvider";
+import { WishlistsContext } from "../Context/WishlistsProvider";
 
-function AddToWishList({ gift, wishlists, user, isShown, setIsShown }) {
+function AddToWishList({ gift, isShown, setIsShown }) {
   const [foundWishlist, setFoundWishlist] = useState([]);
   const [details, setDetails] = useState([null]);
+  let [user, setUser] = useContext(UserContext);
+  let [wishlists, setWishlists] = useContext(WishlistsContext);
 
   useEffect(() => {
     fetch(`/gifts/${gift.id}`)
@@ -18,7 +22,7 @@ function AddToWishList({ gift, wishlists, user, isShown, setIsShown }) {
   }
 
   function handleSaveGiftToSelectedWishlist() {
-    fetch("/saved_gifts/", {
+    fetch("/saved_gifts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

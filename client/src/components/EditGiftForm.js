@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditGiftForm({ setIsShown, setSavedGifts, savedGift }) {
+function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
   const [giftName, setGiftName] = useState(savedGift.gift_name);
   const [description, setDescription] = useState(savedGift.description);
   const [price, setPrice] = useState(savedGift.price);
@@ -26,7 +26,7 @@ function EditGiftForm({ setIsShown, setSavedGifts, savedGift }) {
       }),
     })
       .then((res) => res.json())
-      .then((editedGift) => console.log(editedGift));
+      .then((editedGift) => setSavedGift(editedGift));
 
     setIsShown(false);
   }

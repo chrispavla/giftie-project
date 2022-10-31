@@ -1,23 +1,31 @@
-import { withRouter } from "react-router-dom";
 import NewGiftForm from "./NewGiftForm";
 import SavedGiftList from "./SavedGiftList";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { WishlistsContext } from "../Context/WishlistsProvider";
 
-function Wishlist(props) {
-  const {
-    wishlists,
-    savedGifts,
-    history,
-    submitNewGift,
-    match,
-    user,
-    deleteWishlist,
-  } = props;
-
-  const id = parseInt(match.params.id);
-  const wishlist = wishlists.find((wishlist) => wishlist.id === id);
+function Wishlist({ submitNewGift, deleteWishlist }) {
   const [isShown, setIsShown] = useState(false);
-  // const [rerender, setRerender] = useState(false);
+  let [wishlists, setWishlists] = useContext(WishlistsContext);
+  let { id } = useParams();
+  const [wishlist, setWishlist] = useState([]);
+  const [savedGifts, setSavedGifts] = useState([]);
+  let history = useHistory();
+
+  useEffect(() => {
+    fetch(`/wish_lists/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setWishlist(data);
+          setSavedGifts(data.saved_gifts);
+        });
+      }
+    });
+  }, [id]);
+
+  function submitNewGift(newGiftObj) {
+    setSavedGifts([...savedGifts, newGiftObj]);
+  }
 
   function handleShowNewGiftForm() {
     setIsShown(true);
@@ -27,19 +35,24 @@ function Wishlist(props) {
     history.goBack();
   }
 
+  function deleteWishlist(deletedWishlist) {
+    setWishlists(
+      wishlists.filter((wishlist) => wishlist.id !== deletedWishlist.id)
+    );
+  }
+
   function handleDeleteWishList(deletedWishlist) {
     fetch(`/wish_lists/${deletedWishlist.id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((deletedWishlist) => deleteWishlist(deletedWishlist));
+      .then(() => deleteWishlist(deletedWishlist));
     history.push("/myProfile");
-    window.location.reload();
   }
 
   return (
     <div>
-      {wishlist.saved_gifts.length === 0 ? (
+      {wishlist.length === 0 ? (
         <div>
           <div className="buttonslisst">
             <button className="buttonback" onClick={handleGoBack}>
@@ -61,7 +74,6 @@ function Wishlist(props) {
           </button>
           {isShown ? (
             <NewGiftForm
-              user={user}
               wishlist={wishlist}
               setIsShown={setIsShown}
               submitNewGift={submitNewGift}
@@ -85,15 +97,14 @@ function Wishlist(props) {
           {wishlist.event_date ? (
             <p className="wishlistitle">{wishlist.event_date}</p>
           ) : null}
-          {wishlist.saved_gifts !== null ? (
-            <SavedGiftList wishlistSavedGifts={wishlist.saved_gifts} />
+          {savedGifts.length > 0 ? (
+            <SavedGiftList wishlistSavedGifts={savedGifts} />
           ) : null}
           <button className="button" onClick={handleShowNewGiftForm}>
             Add a Gift
           </button>
           {isShown ? (
             <NewGiftForm
-              user={user}
               submitNewGift={submitNewGift}
               wishlist={wishlist}
               setIsShown={setIsShown}
@@ -104,4 +115,4 @@ function Wishlist(props) {
     </div>
   );
 }
-export default withRouter(Wishlist);
+export default Wishlist;
