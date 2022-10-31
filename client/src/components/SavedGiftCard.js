@@ -21,22 +21,6 @@ function SavedGiftCard({ wishlistSavedGift }) {
         </div>
       </div>
     </div>
-
-    // {/* // <div class="col">
-    // //   <div class="card h-100">
-    // //     <Link className="link" to={`/saved_gifts/${wishlistSavedGift.id}`}>
-    // //       {wishlistSavedGift.image_url ? ( */}
-    // {/* //         <img class="card-img-top" src={wishlistSavedGift.image_url} />
-    // //       ) : (
-    // //         <img class="card-img-top" src={GiftImage} />
-    // //       )}
-    // //       <div class="card-body">
-    // //         <h3 class="card-title">{wishlistSavedGift.gift_name}</h3>
-    // //         <h4 class="card-text">${wishlistSavedGift.price}</h4>
-    // //       </div>
-    // //     </Link> */}
-    // {/* //   </div> */}
-    // {/* // </div> */}
   );
 }
 

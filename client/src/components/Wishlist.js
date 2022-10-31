@@ -13,6 +13,7 @@ function Wishlist(props) {
     user,
     deleteWishlist,
   } = props;
+
   const id = parseInt(match.params.id);
   const wishlist = wishlists.find((wishlist) => wishlist.id === id);
   const [isShown, setIsShown] = useState(false);
@@ -84,7 +85,9 @@ function Wishlist(props) {
           {wishlist.event_date ? (
             <p className="wishlistitle">{wishlist.event_date}</p>
           ) : null}
-          <SavedGiftList wishlistSavedGifts={wishlist.saved_gifts} />
+          {wishlist.saved_gifts !== null ? (
+            <SavedGiftList wishlistSavedGifts={wishlist.saved_gifts} />
+          ) : null}
           <button className="button" onClick={handleShowNewGiftForm}>
             Add a Gift
           </button>
