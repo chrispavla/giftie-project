@@ -1,14 +1,12 @@
 import React, { useState } from "react";
+import { Button, Header, Modal, Form, Icon } from "semantic-ui-react";
 
-function NewWishListForm({ setIsShown, submitNewWishlist }) {
+function NewWishListForm({ submitNewWishlist }) {
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
-
-  function handleCloseNewWishlistForm() {
-    setIsShown(false);
-  }
+  const [open, setOpen] = useState(false);
 
   function handleSubmitNewWishlistForm(e) {
     e.preventDefault();
@@ -29,13 +27,12 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
       if (res.ok) {
         res.json().then((newWishlist) => {
           submitNewWishlist(newWishlist);
-          setIsShown(false);
+          setOpen(false);
         });
       } else {
         res.json().then((error) => setError(error.errors));
       }
     });
-    // .then((newWishlist) => submitNewWishlist(newWishlist));
 
     setTitle("");
     setEventDate("");
@@ -43,60 +40,76 @@ function NewWishListForm({ setIsShown, submitNewWishlist }) {
   }
 
   return (
-    <div>
-      <button className="buttonx" onClick={handleCloseNewWishlistForm}>
-        {" "}
-        x{" "}
-      </button>
-      <p className="createnew">Create New Wish list</p>
-      <form className="giftformm" onSubmit={handleSubmitNewWishlistForm}>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
-            Wish List Name
-          </label>
-          <input
-            class="form-control"
-            id="exampleInputEmail1"
-            type="text"
-            name="wishlist-name"
-            placeholder="Mom's 65th Birthday"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-        </div>
-        <div class="mb-3">
-          <label for="eventdate" class="form-label">
-            Event Date
-          </label>
-          <input
-            class="form-control"
-            id="eventdate"
-            name="event-date"
-            type="date"
-            value={eventDate}
-            onChange={(e) => setEventDate(e.target.value)}
-          ></input>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">
-            Description
-          </label>
-          <input
-            class="form-control"
-            id="description"
-            name="description"
-            type="text"
-            placeholder="Some ideas for birthday"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          ></input>
-        </div>
-        {error ? error.map((err) => <div className="errors">{err}</div>) : null}
-        <button type="submit" className="button">
-          Create List
-        </button>
-      </form>
-    </div>
+    <Modal
+      closeIcon
+      size="tiny"
+      open={open}
+      trigger={
+        <Button
+          style={{
+            marginTop: "50px",
+            backgroundColor: "#8c4c65",
+            color: "#ffff",
+          }}
+        >
+          Add a New Wishlist
+        </Button>
+      }
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+    >
+      <Header
+        icon="gift"
+        content="Create New Wishlist"
+        style={{
+          backgroundColor: "#f8a27d",
+          color: "#ffff",
+        }}
+      />
+      <Modal.Content>
+        <Form onSubmit={handleSubmitNewWishlistForm}>
+          <Form.Field>
+            <label>Wishlist Name</label>
+            <input
+              type="text"
+              placeholder="Mom's 65th Birthday"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+          </Form.Field>
+          <Form.Field>
+            <label>Event Date</label>
+            <input
+              type="date"
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
+            ></input>
+          </Form.Field>
+          <Form.Field>
+            <label>Description</label>
+            <input
+              type="text"
+              placeholder="Some ideas for birthday"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            ></input>
+          </Form.Field>
+          {error
+            ? error.map((err) => <div className="errors">{err}</div>)
+            : null}
+          <Button
+            type="submit"
+            style={{
+              backgroundColor: "#8c4c65",
+              color: "#ffff",
+            }}
+          >
+            <Icon name="add" />
+            Create List
+          </Button>
+        </Form>
+      </Modal.Content>
+    </Modal>
   );
 }
 

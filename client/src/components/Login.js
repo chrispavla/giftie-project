@@ -1,12 +1,25 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Context/UserProvider";
 import { useHistory } from "react-router-dom";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+  Icon,
+  Input,
+  Label,
+} from "semantic-ui-react";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isShowingPassword, setIsShowingPassword] = useState(false);
   let [user, setUser] = useContext(UserContext);
 
   let history = useHistory();
@@ -38,76 +51,43 @@ function Login() {
     });
   }
 
-  function handleShowPassword() {
-    let x = document.getElementById("myInput");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
-
   return (
-    <div class="text-center">
-      <h3 className="loginh">Login</h3>
-      <form onSubmit={handleSubmit}>
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example1">
-            Username
-            <input
-              id="form2Example1"
-              class="form-control"
-              type="text"
-              name="username"
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Image src="/logo.png" />
+        <Header as="h2" color="purple" textAlign="center">
+          Log-in to your account
+        </Header>
+        <Form size="large" onSubmit={handleSubmit}>
+          <Segment stacked>
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <div class="form-outline mb-4">
-          <label class="form-label" for="myInput">
-            Password
-            <input
-              id="myInput"
-              class="form-control"
-              type="password"
-              name="password"
+            />
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
+              type={isShowingPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            {/* <div class="form-check"> */}
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="form2Example31"
-              onClick={handleShowPassword}
-            />
-            <label
-              style={{ marginLeft: "10px" }}
-              class="form-check-label"
-              for="form2Example31"
-            >
-              Show Password
-            </label>
-            {/* </div> */}
-          </div>
-        </div>
-        <button class="buttonlogin" type="submit">
-          {isLoading ? "Loading..." : "Login"}
-        </button>
-      </form>
-      {error ? <div>{error}</div> : null}
-      <div class="text-center account">
-        <p>Don't have an account?</p>
-        <a className="signup" href="/signup">
-          Sign up
-        </a>
-      </div>
-    </div>
+            ></Form.Input>
+            <Button color="purple" fluid size="large">
+              {isLoading ? <Icon loading name="spinner" /> : "Login"}
+            </Button>
+            {error ? <div>{error}</div> : null}
+          </Segment>
+        </Form>
+        <Message>
+          Don't have an account? <a href="/signup">Sign Up</a>
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 }
 

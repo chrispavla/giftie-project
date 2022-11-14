@@ -1,7 +1,16 @@
-import { withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AddToWishList from "./AddToWishList";
 import { useHistory, useParams } from "react-router-dom";
+import {
+  Icon,
+  Label,
+  Button,
+  Image,
+  Item,
+  Dropdown,
+  Container,
+  Divider,
+} from "semantic-ui-react";
 
 function GiftDetails({ updateGifts, wishlists }) {
   const [isShown, setIsShown] = useState(false);
@@ -28,44 +37,51 @@ function GiftDetails({ updateGifts, wishlists }) {
   }
 
   return (
-    <div>
-      <button className="buttonbackk" onClick={handleGoBack}>
-        Back to Gift Ideas
-      </button>
-      <div class="card mb-3 cardd">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img class="img-fluid rounded-start" src={gift.image_url}></img>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h2>{gift.gift_name}</h2>
-              <p>$ {gift.price}</p>
-              {gift.link_url ? (
-                <a className="buyhere" href={gift.link_url}>
-                  Buy here
-                </a>
-              ) : null}
-              <div className="giftbuttons">
-                <button className="editbutton" onClick={handleAddToWishlist}>
-                  Add to Wishlist
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {isShown ? (
-          <AddToWishList
-            updateGifts={updateGifts}
-            gift={gift}
-            wishlists={wishlists}
-            setIsShown={setIsShown}
-            isShown={isShown}
-          />
-        ) : null}
+    <Container>
+      <div>
+        <Button onClick={handleGoBack}>Back to Gift Ideas</Button>
       </div>
-    </div>
+      <Divider />
+      <br />
+      <Item.Group divided>
+        <Item
+          style={{
+            width: "60%",
+            height: "auto",
+            alignItems: "center",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Item.Image src={gift.image_url} />
+          <Item.Content>
+            <Item.Header>{gift.gift_name}</Item.Header>
+            <Item.Meta>
+              <span className="price">${gift.price}</span>
+            </Item.Meta>
+            <Item.Extra>
+              <Button compact floated="right" onClick={handleAddToWishlist}>
+                <Icon name="add" />
+                Add to Wishlist
+              </Button>
+              <Label as="a" href={gift.link_url}>
+                Buy here
+              </Label>
+              {isShown ? (
+                <AddToWishList
+                  updateGifts={updateGifts}
+                  gift={gift}
+                  wishlists={wishlists}
+                  setIsShown={setIsShown}
+                  isShown={isShown}
+                />
+              ) : null}
+            </Item.Extra>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+    </Container>
   );
 }
 
-export default withRouter(GiftDetails);
+export default GiftDetails;

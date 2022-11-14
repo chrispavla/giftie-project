@@ -1,5 +1,6 @@
 import React from "react";
 import SavedGiftCard from "./SavedGiftCard";
+import { Card } from "semantic-ui-react";
 
 function SavedGiftList({ wishlistSavedGifts }) {
   const wishlistSavedGiftsToDisplay = wishlistSavedGifts.map(
@@ -12,9 +13,9 @@ function SavedGiftList({ wishlistSavedGifts }) {
   );
 
   return (
-    <div class="row row-cols-3 row-cols-md-4 g-4">
+    <Card.Group style={{ marginTop: "20px" }} centered itemsPerRow={4}>
       {wishlistSavedGiftsToDisplay}
-    </div>
+    </Card.Group>
   );
 }
 
