@@ -1,9 +1,97 @@
-body {
+.ui.secondary.pointing.menu {
+  background-color: #f8a27d;
+}
+
+.ui.secondary.pointing.menu .active.item {
+  border-color: #ffff !important;
+  color: #8c4c65 !important;
+}
+
+.ui.menu .item {
+  color: #8c4c65 !important;
+}
+
+/* .ui.menu {
+  margin: 0 !important;
+} */
+
+.errors {
+  color: rgb(192, 4, 4);
+}
+
+h1.ui.header {
+  margin-top: 0 !important;
+  padding-top: 3em;
+}
+
+.background {
+  background-image: url(/Users/kristinahodges/Development/code/phase-4/giftie-project/client/src/assets/backgroundImage.jpg);
+  background-size: cover;
+}
+/*  .registration-form-container {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+        } */
+/* body { */
+/* min-height: 100vh; */
+/* background-image: url(/Users/kristinahodges/Development/code/phase-4/giftie-project/client/src/assets/leone-venter-mTkXSSScrzw-unsplash.jpg); */
+/* background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed; */
+/* } */
+
+/* .container {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.container:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.button {
+  position: absolute;
+  width: 500px;
+  left: 0;
+  top: 180px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.button a {
+  width: 200px;
+  padding: 12px 48px;
+  text-align: center;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+}
+
+.container:hover .button {
+  opacity: 1;
+} */
+
+/* body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 code {
   font-family: "Montserrat", sans-serif;
@@ -23,9 +111,9 @@ code {
 .card-footer {
   background-color: #f8a27d;
   padding: 5px;
-}
+} */
 
-.card-footer p {
+/* .card-footer p {
   color: black;
 }
 
@@ -45,7 +133,7 @@ code {
 
 .link:hover {
   color: #655193;
-}
+} */
 
 /* .image_grid {
   --gap: 16px;
@@ -80,9 +168,9 @@ code {
   padding: 2px 16px;
 } */
 
-.welcome {
+/* .welcome {
   margin-top: 30px;
-}
+} */
 
 /* .cards {
   display: grid;
@@ -101,7 +189,7 @@ code {
   width: 100%;
   height: 100%;
 } */
-
+/* 
 .welcomegiftie {
   color: #8c4c65;
   margin-bottom: 20px;
@@ -123,9 +211,9 @@ code {
   text-decoration: none;
   display: inline-block;
   margin-top: 10px;
-}
+} */
 
-.wishlisting:hover,
+/* .wishlisting:hover,
 .wishlisting:active {
   background-color: #b08595;
 }
@@ -142,9 +230,9 @@ code {
   border-radius: 9px;
   color: #8c4c65;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-}
+} */
 
-.buttonx {
+/* .buttonx {
   background-color: #8c4c65;
   color: white;
   padding: 5px 13px;
@@ -154,9 +242,9 @@ code {
   margin-top: 20px;
   border-radius: 12px;
   border: none;
-}
+} */
 
-.giftForm {
+/* .giftForm {
   display: flex;
   justify-content: space-around;
 }
@@ -168,9 +256,9 @@ code {
 .createnew {
   text-align: center;
   font-weight: bold;
-}
+} */
 
-.button {
+/* .button {
   background-color: #8c4c65;
   color: white;
   padding: 12px 23px;
@@ -182,9 +270,9 @@ code {
   border: none;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
-.selectwishlist {
+/* .selectwishlist {
   margin-left: 35rem;
   margin-right: auto;
   margin-top: -20px;
@@ -194,9 +282,9 @@ code {
   color: red;
   font-weight: bold;
   margin-top: 10px;
-}
+} */
 
-.savegiftbutton {
+/* .savegiftbutton {
   background-color: #8c4c65;
   color: white;
   padding: 10px 20px;
@@ -206,9 +294,9 @@ code {
   border-radius: 12px;
   border: none;
   margin-left: 50rem;
-}
+} */
 
-.signup {
+/* .signup {
   text-decoration: none;
   color: #8c4c65;
 }
@@ -227,9 +315,9 @@ code {
   margin-top: 20px;
   border-radius: 12px;
   border: none;
-}
+} */
 
-.cardd {
+/* .cardd {
   max-width: 940px;
   margin-top: 40px;
   margin-left: auto;
@@ -239,9 +327,9 @@ code {
 .buttonslisst {
   display: flex;
   justify-content: space-between;
-}
+} */
 
-.buttongift {
+/* .buttongift {
   background-color: #8c4c65;
   color: white;
   padding: 10px;
@@ -257,9 +345,9 @@ code {
 .giftformm {
   margin-left: 10rem;
   margin-right: 10rem;
-}
+} */
 
-.wishlistForm {
+/* .wishlistForm {
   margin-left: 10rem;
   margin-right: 10rem;
 }
@@ -271,14 +359,14 @@ code {
   text-align: center;
   text-decoration: none;
   /* display: block; */
-  margin-top: 20px;
+/* margin-top: 20px;
   border-radius: 12px;
   border: none;
   margin-top: 30px;
   margin-bottom: 30px;
-}
+} */
 
-.buttonbackk {
+/* .buttonbackk {
   background-color: #8c4c65;
   color: white;
   padding: 12px 23px;
@@ -291,8 +379,8 @@ code {
   margin-top: 30px;
   margin-bottom: 30px;
   margin-left: 30px;
-}
-
+} */
+/* 
 .editbutton {
   background-color: #b08595;
   color: white;
@@ -303,9 +391,9 @@ code {
   border-radius: 12px;
   border: none;
   margin-top: 30px;
-}
+} */
 
-.removebutton {
+/* .removebutton {
   background-color: #8c4c65;
   color: white;
   padding: 6px 16px;
@@ -345,8 +433,8 @@ code {
   text-align: center;
   margin-bottom: 30px;
   color: #8c4c65;
-}
-
+} */
+/* 
 .button:hover,
 .button:active {
   background-color: #b08595;
@@ -360,9 +448,9 @@ code {
 .loginh {
   margin: 30px;
   color: #8c4c65;
-}
+} */
 
-.myprofilename {
+/* .myprofilename {
   text-align: center;
   margin-top: 20px;
 }
@@ -381,8 +469,8 @@ code {
 .home {
   display: flex;
   text-align: center;
-}
-
+} */
+/* 
 .item_image {
   width: 250px;
   height: 300px;
@@ -390,7 +478,7 @@ code {
   padding: 1px;
   border-color: rgb(79, 18, 0);
   border-width: 5px;
-}
+} */
 
 /* .listcard {
   -webkit-transform: scale(1);
@@ -427,7 +515,7 @@ nav a:active {
   border-bottom: 2px solid #ffff;
 } */
 
-.navbar {
+/* .navbar {
   background-color: #f8a27d;
 }
 
@@ -446,4 +534,4 @@ nav a:active {
   white-space: nowrap;
   color: white;
   width: auto;
-}
+} */

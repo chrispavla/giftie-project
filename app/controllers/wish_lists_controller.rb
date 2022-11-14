@@ -1,7 +1,7 @@
 class WishListsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  
+
   wrap_parameters format: []
 
   def index
@@ -18,6 +18,12 @@ class WishListsController < ApplicationController
   def create 
     wish_list = WishList.create!(wish_list_params)
     render json: wish_list, status: :created
+  end
+
+  def update 
+    wishlist = WishList.find(params[:id])
+    wishlist.update!(wish_list_params)
+    render json: wishlist, status: :accepted
   end
 
   def destroy 

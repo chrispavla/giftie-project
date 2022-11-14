@@ -8,9 +8,11 @@ function WishlistsProvider({ children }) {
   const [wishlists, setWishlists] = useState([]);
 
   useEffect(() => {
-    fetch("/wish_lists")
-      .then((res) => res.json())
-      .then((wishlists) => setWishlists(wishlists));
+    fetch("/wish_lists").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => setWishlists(data));
+      }
+    });
   }, []);
 
   // the value prop of the provider will be our context data

@@ -1,26 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import GiftImage from "../gift_image.jpg";
+import GiftImage from "../assets/gift_image.jpg";
+import {
+  Card,
+  Icon,
+  Label,
+  Dimmer,
+  Button,
+  Image,
+  Item,
+} from "semantic-ui-react";
 
 function SavedGiftCard({ wishlistSavedGift }) {
   return (
-    <div class="col">
-      <div class="card h-100">
-        <Link className="link" to={`/saved_gifts/${wishlistSavedGift.id}`}>
-          {wishlistSavedGift.image_url ? (
-            <img class="card-img-top" src={wishlistSavedGift.image_url} />
-          ) : (
-            <img class="card-img-top" src={GiftImage} />
-          )}
-        </Link>
-        <div class="card-body">
-          <h5 class="card-title">{wishlistSavedGift.gift_name}</h5>
-        </div>
-        <div class="card-footer">
-          <p>$ {wishlistSavedGift.price}</p>
-        </div>
-      </div>
-    </div>
+    <Card
+      raised
+      as={Link}
+      to={`/saved_gifts/${wishlistSavedGift.id}`}
+      style={{ width: "280px", height: "380px" }}
+    >
+      {wishlistSavedGift.image_url ? (
+        <img
+          src={wishlistSavedGift.image_url}
+          style={{ width: "100%", height: "70%", objectFit: "cover" }}
+        />
+      ) : (
+        <img
+          src={GiftImage}
+          style={{ width: "100%", height: "60%", objectFit: "cover" }}
+        />
+      )}
+
+      <Card.Content>
+        <Card.Header>{wishlistSavedGift.gift_name}</Card.Header>
+      </Card.Content>
+      <Card.Content extra>
+        <Card.Description textAlign="left">
+          <Icon name="dollar sign" />
+          {wishlistSavedGift.price}
+        </Card.Description>
+      </Card.Content>
+    </Card>
   );
 }
 

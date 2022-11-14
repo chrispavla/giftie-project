@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { UserContext } from "../Context/UserProvider";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import logo from "../logo.png";
+import logo from "../assets/logo.png";
+import { Menu, Image } from "semantic-ui-react";
 
 function NavBar() {
   let [user, setUser] = useContext(UserContext);
@@ -19,94 +20,49 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg">
-      {!user ? (
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <img src={logo} alt="logo" width="30" height="34"></img>
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <NavLink className="nav-link" exact to="/">
-                Home
-              </NavLink>
-              <NavLink className="nav-link" exact to="/login">
-                Log in
-              </NavLink>
-              <NavLink className="nav-link" exact to="/signup">
-                Sign up
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <img src={logo} alt="logo" width="30" height="34"></img>
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <NavLink className="nav-link" exact to="/">
-                Home
-              </NavLink>
-              <NavLink className="nav-link" exact to="/myProfile">
-                My Wish Lists
-              </NavLink>
-              <NavLink className="nav-link" exact to="/gifts">
-                Gift Ideas
-              </NavLink>
-              <NavLink className="nav-link" onClick={handleLogout} exact to="/">
-                Logout
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* <NavLink exact to="/">
+    <Menu pointing secondary>
+      <Menu.Item as={Link} to="/">
+        <Image size="small" alt="logo" src={logo} />
+      </Menu.Item>
+      <Menu.Item style={{ marginBottom: "0.35em" }} as={NavLink} exact to="/">
         Home
-      </NavLink>
-      <NavLink exact to="/gifts">
-        Gift Ideas
-      </NavLink>
-      <NavLink exact to="/login">
-        Log in
-      </NavLink>
-      <NavLink exact to="/signup">
-        Sign up
-      </NavLink>
-      <NavLink exact to="/myProfile">
-        My Wish Lists
-      </NavLink>
-      <NavLink exact to="/gifts">
-        Gift Ideas
-      </NavLink>
-      <NavLink onClick={handleLogout} exact to="/">
-        Logout
-      </NavLink> */}
-    </nav>
+      </Menu.Item>
+      {!user ? (
+        <Menu.Menu position="right">
+          <Menu.Item as={NavLink} to="/login">
+            Log In
+          </Menu.Item>
+          <Menu.Item as={NavLink} to="/signup">
+            Sign up
+          </Menu.Item>
+        </Menu.Menu>
+      ) : (
+        <>
+          <Menu.Item
+            style={{ marginBottom: "0.35em" }}
+            as={NavLink}
+            to="/myProfile"
+          >
+            My Wish Lists
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "0.35em" }}
+            as={NavLink}
+            to="/gifts"
+          >
+            Gift Ideas
+          </Menu.Item>
+          <Menu.Menu position="right">
+            <Menu.Item as={NavLink} to={"/myProfile"}>
+              Logged in as {user.username}
+            </Menu.Item>
+            <Menu.Item as={NavLink} to="/login" onClick={handleLogout}>
+              Log Out
+            </Menu.Item>
+          </Menu.Menu>
+        </>
+      )}
+    </Menu>
   );
 }
 

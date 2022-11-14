@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../Context/UserProvider";
 import { WishlistsContext } from "../Context/WishlistsProvider";
+import { Dropdown, Button } from "semantic-ui-react";
 
 function AddToWishList({ gift, isShown, setIsShown }) {
   const [foundWishlist, setFoundWishlist] = useState([]);
@@ -14,9 +15,9 @@ function AddToWishList({ gift, isShown, setIsShown }) {
       .then((data) => setDetails(data));
   }, []);
 
-  function handleChangeWishlists(e) {
+  function handleChangeWishlists(e, data) {
     let foundWishlist = wishlists.find(
-      (wishlist) => wishlist.title === e.target.value
+      (wishlist) => wishlist.title === data.value
     );
     setFoundWishlist(foundWishlist);
   }
@@ -45,25 +46,23 @@ function AddToWishList({ gift, isShown, setIsShown }) {
     setIsShown(!isShown);
   }
 
+  const selections = wishlists.map((wishlist) => ({
+    key: wishlist.id,
+    text: wishlist.title,
+    value: wishlist.title,
+  }));
+
   return (
     <div>
-      <button
-        className="savegiftbutton"
-        onClick={handleSaveGiftToSelectedWishlist}
-      >
-        Save Gift
-      </button>
-      <select
-        className="selectwishlist"
-        onChange={(e) => handleChangeWishlists(e)}
-      >
-        <option value="Select Wishlist">Select Wishlist</option>
-        {wishlists.map((wishlist) => (
-          <option key={wishlist.id} value={wishlist.title}>
-            {wishlist.title}
-          </option>
-        ))}
-      </select>
+      <Dropdown
+        style={{ marginTop: "20px" }}
+        button
+        onChange={(e, data) => handleChangeWishlists(e, data)}
+        placeholder="Select Wishlist"
+        selection
+        options={selections}
+      />
+      <Button onClick={handleSaveGiftToSelectedWishlist}>Save Gift</Button>
     </div>
   );
 }
