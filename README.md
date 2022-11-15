@@ -49,6 +49,7 @@ npm start —prefix client
 - React
 - Ruby
 - Ruby on Rails
+- PostgreSQL
 - React Router DOM
 - Semantic UI
 - Custom CSS
