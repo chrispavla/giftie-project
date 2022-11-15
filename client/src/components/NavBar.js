@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../Context/UserProvider";
 import { NavLink, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -43,7 +43,7 @@ function NavBar() {
             as={NavLink}
             to="/myProfile"
           >
-            My Wish Lists
+            My Wishlists
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "0.35em" }}

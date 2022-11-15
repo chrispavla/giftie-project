@@ -33,7 +33,6 @@ function AddToWishList({ gift, isShown, setIsShown }) {
         description: details.description,
         tags: details.tags,
         price: details.price,
-        quantity: details.quantity,
         link_url: details.link_url,
         image_url: details.image_url,
         user_id: user.id,
@@ -62,7 +61,14 @@ function AddToWishList({ gift, isShown, setIsShown }) {
         selection
         options={selections}
       />
-      <Button onClick={handleSaveGiftToSelectedWishlist}>Save Gift</Button>
+      <Button
+        style={{
+          backgroundColor: "#f8a27d",
+        }}
+        onClick={handleSaveGiftToSelectedWishlist}
+      >
+        Save Gift
+      </Button>
     </div>
   );
 }

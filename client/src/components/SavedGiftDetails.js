@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import EditGiftForm from "./EditGiftForm";
 import GiftImage from "../assets/gift_image.jpg";
 import { useHistory, useParams } from "react-router-dom";
-import {
-  Icon,
-  Label,
-  Button,
-  Image,
-  Item,
-  Dropdown,
-  Container,
-  Divider,
-} from "semantic-ui-react";
+import { Label, Button, Item, Container, Divider } from "semantic-ui-react";
 
 function SavedGiftDetails(handleSavedItemRender) {
   const [isShown, setIsShown] = useState(false);
@@ -43,16 +34,20 @@ function SavedGiftDetails(handleSavedItemRender) {
     history.goBack();
   }
 
-  function handleShowEditGiftForm() {
-    setIsShown(true);
-  }
-
   return (
     <Container>
       <div>
-        <Button className="buttonbackk" onClick={handleGoBack}>
-          Back to Wishlist
-        </Button>
+        <Button
+          labelPosition="left"
+          icon="left chevron"
+          content="Back to Wishlist"
+          style={{
+            backgroundColor: "#8c4c65",
+            color: "#ffff",
+            marginTop: "20px",
+          }}
+          onClick={handleGoBack}
+        ></Button>
       </div>
       <Divider />
       <br />
@@ -83,21 +78,33 @@ function SavedGiftDetails(handleSavedItemRender) {
               <Button
                 circular
                 icon="trash alternate"
-                style={{ marginLeft: "5px", background: "none" }}
                 onClick={handleDeleteGiftFromWishList}
+                style={{
+                  marginLeft: "5px",
+                  background: "none",
+                  color: "#8c4c65",
+                }}
               />
             </Item.Header>
             <Item.Description>
               <p>{savedGift.description}</p>
             </Item.Description>
             <Item.Meta>
-              <span className="price">${savedGift.price}</span>
+              <span>${savedGift.price}0</span>
             </Item.Meta>
-            <Item.Extra>
-              <Label as="a" href={savedGift.link_url}>
-                Buy here
-              </Label>
-            </Item.Extra>
+            {savedGift.link_url ? (
+              <Item.Extra>
+                <Label
+                  as="a"
+                  href={savedGift.link_url}
+                  style={{
+                    backgroundColor: "#f8a27d",
+                  }}
+                >
+                  Buy here
+                </Label>
+              </Item.Extra>
+            ) : null}
           </Item.Content>
         </Item>
       </Item.Group>

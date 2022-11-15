@@ -6,22 +6,18 @@ import { WishlistsContext } from "../Context/WishlistsProvider";
 import {
   Container,
   Icon,
-  Popup,
   Modal,
   Form,
   Header,
   Button,
-  Image,
-  Divider,
 } from "semantic-ui-react";
 
 function Wishlist({ submitNewGift, deleteWishlist }) {
-  const [isShown, setIsShown] = useState(false);
   let [wishlists, setWishlists] = useContext(WishlistsContext);
   let { id } = useParams();
+  let history = useHistory();
   const [wishlist, setWishlist] = useState([]);
   const [savedGifts, setSavedGifts] = useState([]);
-  let history = useHistory();
   const [title, setTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
@@ -83,7 +79,7 @@ function Wishlist({ submitNewGift, deleteWishlist }) {
         handleWishlistEdit();
         setOpen(false);
       } else {
-        r.json().then((data) => setError(Object.values(data).join()));
+        r.json().then((error) => setError(error.error));
       }
     });
   }
@@ -96,17 +92,23 @@ function Wishlist({ submitNewGift, deleteWishlist }) {
 
   return (
     <Container textAlign="center">
-      <Button
-        floated="left"
-        onClick={handleGoBack}
-        labelPosition="left"
-        icon="left chevron"
-        content="Back to Wishlists"
+      <div
         style={{
-          backgroundColor: "#8c4c65",
-          color: "#ffff",
+          marginTop: "20px",
         }}
-      />
+      >
+        <Button
+          floated="left"
+          onClick={handleGoBack}
+          labelPosition="left"
+          icon="left chevron"
+          content="Back to Wishlists"
+          style={{
+            backgroundColor: "#8c4c65",
+            color: "#ffff",
+          }}
+        />
+      </div>
       <br />
       <h2 style={{ marginLeft: "30px" }}>
         {wishlist.title} Wishlist{" "}
@@ -192,8 +194,8 @@ function Wishlist({ submitNewGift, deleteWishlist }) {
           onClick={() => handleDeleteWishList(wishlist)}
         />
       </h2>
-      <p className="wishlistitle">{wishlist.event_date}</p>
-      <p className="wishlistitle">{wishlist.note}</p>
+      <p>{wishlist.event_date}</p>
+      <p>{wishlist.note}</p>
       {savedGifts.length > 0 ? (
         <SavedGiftList wishlistSavedGifts={savedGifts} />
       ) : null}

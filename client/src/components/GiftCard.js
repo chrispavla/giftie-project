@@ -1,15 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GiftImage from "../assets/gift_image.jpg";
-import {
-  Card,
-  Icon,
-  Label,
-  Dimmer,
-  Button,
-  Image,
-  Item,
-} from "semantic-ui-react";
+import { Card, Icon, Label } from "semantic-ui-react";
 
 function GiftCard({ gift }) {
   const tagsToDisplay = gift.tags.map((tag) => (
@@ -44,7 +36,7 @@ function GiftCard({ gift }) {
       <Card.Content extra>
         <Card.Description>
           <Icon name="dollar sign" />
-          {gift.price}
+          {gift.price}0
         </Card.Description>
       </Card.Content>
     </Card>

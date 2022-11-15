@@ -5,9 +5,7 @@ import {
   Icon,
   Label,
   Button,
-  Image,
   Item,
-  Dropdown,
   Container,
   Divider,
 } from "semantic-ui-react";
@@ -39,7 +37,17 @@ function GiftDetails({ updateGifts, wishlists }) {
   return (
     <Container>
       <div>
-        <Button onClick={handleGoBack}>Back to Gift Ideas</Button>
+        <Button
+          labelPosition="left"
+          icon="left chevron"
+          content="Back to Gift Ideas"
+          style={{
+            backgroundColor: "#8c4c65",
+            color: "#ffff",
+            marginTop: "20px",
+          }}
+          onClick={handleGoBack}
+        ></Button>
       </div>
       <Divider />
       <br />
@@ -57,14 +65,28 @@ function GiftDetails({ updateGifts, wishlists }) {
           <Item.Content>
             <Item.Header>{gift.gift_name}</Item.Header>
             <Item.Meta>
-              <span className="price">${gift.price}</span>
+              <span className="price">${gift.price}0</span>
             </Item.Meta>
             <Item.Extra>
-              <Button compact floated="right" onClick={handleAddToWishlist}>
+              <Button
+                compact
+                floated="right"
+                style={{
+                  backgroundColor: "#8c4c65",
+                  color: "#ffff",
+                }}
+                onClick={handleAddToWishlist}
+              >
                 <Icon name="add" />
                 Add to Wishlist
               </Button>
-              <Label as="a" href={gift.link_url}>
+              <Label
+                as="a"
+                href={gift.link_url}
+                style={{
+                  backgroundColor: "#f8a27d",
+                }}
+              >
                 Buy here
               </Label>
               {isShown ? (

@@ -1,6 +1,15 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Context/UserProvider";
 import { useHistory } from "react-router-dom";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Icon,
+} from "semantic-ui-react";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -34,78 +43,62 @@ function Signup() {
         r.json().then((user) => setUser(user));
         history.push("/");
       } else {
-        r.json().then((data) => setError(Object.values(data).join()));
+        r.json().then((error) => setError(error.errors));
       }
     });
   }
 
-  function handleShowPassword() {
-    let x = document.getElementById("myInput");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
-
   return (
-    <div class="text-center">
-      <h3 className="loginh">Signup</h3>
-      <form onSubmit={handleSubmit}>
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example1">
-            Username
-            <input
-              id="form2Example1"
-              class="form-control"
-              type="text"
-              name="username"
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" textAlign="center" style={{ color: "#8c4c65" }}>
+          Signup
+        </Header>
+        <Form size="large" onSubmit={handleSubmit}>
+          <Segment stacked>
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example2">
-            Password
-            <input
-              id="form2Example2"
-              class="form-control"
+            ></Form.Input>
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
               type="password"
-              name="password"
               value={password}
-              id="myInput"
               onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                id="form2Example31"
-                type="checkbox"
-                onClick={handleShowPassword}
-              />
-              <label class="form-check-label" for="form2Example31">
-                Show Password
-              </label>
-            </div>
-          </div>
-        </div>
-        <button class="buttonlogin" type="submit">
-          {isLoading ? "Loading..." : "Sign Up"}
-        </button>
-      </form>
-      {error ? <div>{error}</div> : null}
-      <div class="text-center account">
-        <p>Already registered?</p>
-        <a className="signup" href="/login">
-          Log in
-        </a>
-      </div>
-    </div>
+            ></Form.Input>
+
+            <Button
+              style={{ backgroundColor: "#8c4c65", color: "#ffff" }}
+              fluid
+              size="large"
+            >
+              {isLoading ? <Icon loading name="spinner" /> : "Sign up"}
+            </Button>
+            {error
+              ? error.map((err) => (
+                  <div className="errors">
+                    <Icon name="warning circle"></Icon>
+                    {err}
+                  </div>
+                ))
+              : null}
+          </Segment>
+        </Form>
+        <Message>
+          Already registered?{" "}
+          <a style={{ color: "#8c4c65" }} href="/login">
+            Log in
+          </a>
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 }
 

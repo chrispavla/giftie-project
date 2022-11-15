@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  Icon,
-  Label,
-  Dimmer,
-  Button,
-  Image,
-  Item,
-} from "semantic-ui-react";
+import { Card, Icon } from "semantic-ui-react";
 
 function WishlistCard({ wishlist }) {
   const [wishlistCard, setWishlistCard] = useState(null);

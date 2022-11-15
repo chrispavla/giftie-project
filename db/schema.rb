@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_05_192535) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_203505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "gifts", force: :cascade do |t|
     t.string "gift_name"
     t.text "description"
-    t.decimal "price"
-    t.integer "quantity"
+    t.decimal "price", precision: 8, scale: 2
     t.string "link_url"
     t.string "image_url"
     t.datetime "created_at", null: false
@@ -26,21 +25,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_192535) do
     t.string "tags", default: [], array: true
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer "gift_id"
-    t.integer "user_id"
-    t.text "review"
-    t.integer "ranking"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "saved_gifts", force: :cascade do |t|
     t.string "gift_name"
     t.text "description"
-    t.string "tags"
-    t.decimal "price"
-    t.integer "quantity"
+    t.decimal "price", precision: 8, scale: 2
     t.string "link_url"
     t.string "image_url"
     t.integer "user_id"

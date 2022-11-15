@@ -35,6 +35,10 @@ function Home() {
             fontSize: "1.7em",
             fontWeight: "normal",
             marginTop: "1.5em",
+            textDecorationLine: "underline",
+            textDecorationStyle: "solid",
+            textDecorationColor: "#8c4c65",
+            textDecorationThickness: "10px",
           }}
         />
       </Container>
@@ -42,11 +46,27 @@ function Home() {
         <Grid container stackable verticalAlign="middle">
           <Grid.Row>
             <Grid.Column width={8}>
-              <Header as="h3" style={{ fontSize: "2em" }}>
+              <Header
+                as="h3"
+                style={{
+                  fontSize: "26px",
+                  border: "7px dotted #8C4C65",
+                  borderRadius: "30px",
+                  padding: "15px",
+                  backgroundColor: "#8C4C65",
+                  color: "#ffff",
+                }}
+              >
                 Often think of gifts that would be perfect for people when you
                 are in random places, at random times?
               </Header>
-              <p style={{ fontSize: "1.33em", marginTop: "30px" }}>
+              <p
+                style={{
+                  fontSize: "1.33em",
+                  marginTop: "30px",
+                  marginLeft: "15px",
+                }}
+              >
                 Capture and have it accessible to you when you want to buy that
                 special person a gift!
               </p>
@@ -57,7 +77,17 @@ function Home() {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center">
-              <p style={{ fontSize: "1.33em", marginTop: "30px" }}>
+              <p
+                style={{
+                  fontSize: "1.33em",
+                  marginTop: "30px",
+                  marginTop: "30px",
+                  border: "7px dotted #f8a27d",
+                  borderRadius: "30px",
+                  padding: "10px",
+                  color: "black",
+                }}
+              >
                 Create as many wishlists as you like, easily add gifts from
                 websites or create custom gifts
               </p>
