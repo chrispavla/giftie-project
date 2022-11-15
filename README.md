@@ -57,7 +57,7 @@ npm start —prefix client
 ## Demo 
 
 <a href="https://www.loom.com/share/a7813777ca2b460f946a3df8a421084c">
-    <p>Giftie - Watch Video</p>
+    <p>Giftie - Watch Video Walkthrough</p>
     <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/a7813777ca2b460f946a3df8a421084c-with-play.gif">
   </a>
 
