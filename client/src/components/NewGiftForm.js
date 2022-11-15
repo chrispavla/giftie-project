@@ -1,21 +1,16 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { UserContext } from "../Context/UserProvider";
 import { Button, Header, Icon, Modal, Form } from "semantic-ui-react";
 
-function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
+function NewGiftForm({ wishlist, submitNewGift }) {
   const [giftName, setGiftName] = useState("");
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
   const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   let [user, setUser] = useContext(UserContext);
   const [open, setOpen] = useState(false);
-
-  let history = useHistory();
 
   function handleSubmitNewGiftForm(e) {
     e.preventDefault();
@@ -23,9 +18,7 @@ function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
     let newGift = {
       gift_name: giftName,
       description: description,
-      tags: tags,
       price: price,
-      quantity: quantity,
       link_url: linkUrl,
       image_url: imageUrl,
       user_id: user.id,
@@ -42,8 +35,12 @@ function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
       if (res.ok) {
         res.json().then((data) => {
           submitNewGift(data);
-          alert("Gift has been added to your wishlist!");
-          setIsShown(false);
+          setOpen(false);
+          setGiftName("");
+          setDescription("");
+          setImageUrl("");
+          setLinkUrl("");
+          setPrice("");
         });
       } else {
         res.json().then((error) => setError(error.errors));
@@ -62,6 +59,7 @@ function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
             marginTop: "30px",
             backgroundColor: "#8c4c65",
             color: "#ffff",
+            marginBottom: "30px",
           }}
         >
           Add a Gift
@@ -102,6 +100,9 @@ function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
             <label>Price</label>
             <input
               type="number"
+              min="0.00"
+              max="10000.00"
+              step="0.01"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             ></input>
@@ -133,7 +134,14 @@ function NewGiftForm({ setIsShown, wishlist, submitNewGift }) {
             <Icon name="add" />
             Save Gift
           </Button>
-          {error ? error.map((err) => <div>{err}</div>) : null}
+          {error
+            ? error.map((err) => (
+                <div className="errors">
+                  <Icon name="warning circle"></Icon>
+                  {err}
+                </div>
+              ))
+            : null}
         </Form>
       </Modal.Content>
     </Modal>

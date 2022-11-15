@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
-import NewWishListForm from "./NewWishlistForm";
+
 import WishlistList from "./WishlistList";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { WishlistsContext } from "../Context/WishlistsProvider";
 import { UserContext } from "../Context/UserProvider";
 import {
   Container,
   Icon,
-  Popup,
   Modal,
   Form,
   Header,
@@ -45,7 +44,7 @@ function MyProfile() {
         handleUserEdit();
         setOpen(false);
       } else {
-        r.json().then((data) => setError(Object.values(data).join()));
+        r.json().then((error) => setError(error.error));
       }
     });
   }

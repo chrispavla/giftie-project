@@ -33,7 +33,7 @@ class SavedGiftsController < ApplicationController
   private 
 
   def saved_gift_params 
-    params.permit(:gift_name, :description, :tags, :price, :quantity, :link_url, :image_url, :user_id, :wish_list_id)
+    params.permit(:gift_name, :description, :price, :link_url, :image_url, :user_id, :wish_list_id)
   end
 
   def record_invalid (invalid)

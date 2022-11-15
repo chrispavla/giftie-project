@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import WishlistCard from "./WishlistCard";
 import NewWishListForm from "./NewWishlistForm";
 import { WishlistsContext } from "../Context/WishlistsProvider";
@@ -19,7 +19,7 @@ function WishlistList() {
           ? wishlists.map((wishlist) => (
               <WishlistCard key={wishlist.id} wishlist={wishlist} />
             ))
-          : "Loading.."}
+          : "No wishlists yet. Click below to create one!"}
       </Card.Group>
       <NewWishListForm submitNewWishlist={submitNewWishlist} />
     </>

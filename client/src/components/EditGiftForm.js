@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Icon,
-  Popup,
-  Modal,
-  Form,
-  Header,
-  Button,
-  Image,
-} from "semantic-ui-react";
+import { Icon, Modal, Form, Header, Button } from "semantic-ui-react";
 
-function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
+function EditGiftForm({ setSavedGift, savedGift }) {
   const [giftName, setGiftName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -40,7 +31,7 @@ function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
         handleGiftEdit();
         setOpen(false);
       } else {
-        r.json().then((data) => setError(Object.values(data).join()));
+        r.json().then((error) => setError(error.errors));
       }
     });
   }
@@ -62,14 +53,25 @@ function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
         <Button
           circular
           icon="pencil alternate"
-          style={{ marginLeft: "10px" }}
+          style={{
+            marginLeft: "10px",
+            backgroundColor: "#f8a27d",
+            color: "#8c4c65",
+          }}
           onClick={() => handleGiftEdit()}
         />
       }
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
-      <Header icon="gift" content="Edit Gift" />
+      <Header
+        icon="gift"
+        content="Edit Gift"
+        style={{
+          backgroundColor: "#f8a27d",
+          color: "#ffff",
+        }}
+      />
       <Modal.Content>
         <Form onSubmit={handleSubmitEditGiftForm}>
           <Form.Field>
@@ -97,6 +99,9 @@ function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
             <input
               name="price"
               type="number"
+              min="0.00"
+              max="10000.00"
+              step="0.01"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             ></input>
@@ -121,7 +126,13 @@ function EditGiftForm({ setIsShown, setSavedGift, savedGift }) {
               onChange={(e) => setImageUrl(e.target.value)}
             ></input>
           </Form.Field>
-          <Button type="submit">
+          <Button
+            type="submit"
+            style={{
+              backgroundColor: "#8c4c65",
+              color: "#ffff",
+            }}
+          >
             <Icon name="checkmark" />
             Save Gift
           </Button>

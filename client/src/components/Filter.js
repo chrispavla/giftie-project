@@ -28,16 +28,15 @@ function Filter({
       }}
     >
       <div>
-        <label className="mx-2">Sort By:</label>
+        <label style={{ marginRight: "10px" }}>Sort By:</label>
         <select onChange={handleSortByPriceChange}>
           <option></option>
-          {/* <option>Top Rated</option> */}
           <option value="lowest">Lowest Price</option>
           <option value="highest">Highest price</option>
         </select>
       </div>
       <div>
-        <label className="mx-2">Filter By Occasion:</label>
+        <label style={{ marginRight: "10px" }}>Filter By Occasion:</label>
         <select onChange={handleFilterByOccasion}>
           <option></option>
           <option>Christmas</option>
@@ -48,7 +47,7 @@ function Filter({
         </select>
       </div>
       <div>
-        <label className="mx-2">Filter By Recipient:</label>
+        <label style={{ marginRight: "10px" }}>Filter By Recipient:</label>
         <select onChange={handleFilterByRecipient}>
           <option></option>
           <option>Women</option>

@@ -6,12 +6,9 @@ import {
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment,
   Icon,
-  Input,
-  Label,
 } from "semantic-ui-react";
 
 function Login() {
@@ -19,7 +16,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isShowingPassword, setIsShowingPassword] = useState(false);
   let [user, setUser] = useContext(UserContext);
 
   let history = useHistory();
@@ -46,7 +42,7 @@ function Login() {
         r.json().then((user) => setUser(user));
         history.push("/");
       } else {
-        r.json().then((json) => setError(json.error));
+        r.json().then((error) => setError(error.error));
       }
     });
   }
@@ -54,9 +50,8 @@ function Login() {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Image src="/logo.png" />
-        <Header as="h2" color="purple" textAlign="center">
-          Log-in to your account
+        <Header as="h2" textAlign="center" style={{ color: "#8c4c65" }}>
+          Log in to your account
         </Header>
         <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
@@ -73,18 +68,32 @@ function Login() {
               icon="lock"
               iconPosition="left"
               placeholder="Password"
-              type={isShowingPassword ? "text" : "password"}
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Input>
-            <Button color="purple" fluid size="large">
+            <Button
+              style={{ backgroundColor: "#8c4c65", color: "#ffff" }}
+              fluid
+              size="large"
+            >
               {isLoading ? <Icon loading name="spinner" /> : "Login"}
             </Button>
-            {error ? <div>{error}</div> : null}
+            {error
+              ? error.map((err) => (
+                  <div className="errors">
+                    <Icon name="warning circle"></Icon>
+                    {err}
+                  </div>
+                ))
+              : null}
           </Segment>
         </Form>
         <Message>
-          Don't have an account? <a href="/signup">Sign Up</a>
+          Don't have an account?{" "}
+          <a style={{ color: "#8c4c65" }} href="/signup">
+            Sign Up
+          </a>
         </Message>
       </Grid.Column>
     </Grid>

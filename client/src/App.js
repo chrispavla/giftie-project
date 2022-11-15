@@ -83,7 +83,7 @@ function App() {
           <WishlistsProvider>
             <Route exact path="/gifts">
               <Container textAlign="center">
-                <Header as="h1">Gift ideas</Header>
+                <h1 style={{ marginTop: "40px" }}>Gift ideas</h1>
                 <Filter
                   setSortBySearch={setSortBySearch}
                   setFilterByOccasion={setFilterByOccasion}

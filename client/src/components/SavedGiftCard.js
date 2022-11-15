@@ -1,15 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GiftImage from "../assets/gift_image.jpg";
-import {
-  Card,
-  Icon,
-  Label,
-  Dimmer,
-  Button,
-  Image,
-  Item,
-} from "semantic-ui-react";
+import { Card, Icon } from "semantic-ui-react";
 
 function SavedGiftCard({ wishlistSavedGift }) {
   return (
@@ -27,7 +19,7 @@ function SavedGiftCard({ wishlistSavedGift }) {
       ) : (
         <img
           src={GiftImage}
-          style={{ width: "100%", height: "60%", objectFit: "cover" }}
+          style={{ width: "100%", height: "70%", objectFit: "cover" }}
         />
       )}
 
@@ -37,7 +29,7 @@ function SavedGiftCard({ wishlistSavedGift }) {
       <Card.Content extra>
         <Card.Description textAlign="left">
           <Icon name="dollar sign" />
-          {wishlistSavedGift.price}
+          {wishlistSavedGift.price}0
         </Card.Description>
       </Card.Content>
     </Card>
