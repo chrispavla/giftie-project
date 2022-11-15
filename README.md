@@ -45,13 +45,11 @@ npm start —prefix client
 
 ## Technologies
 
-- Javascript
 - React
-- Ruby
 - Ruby on Rails
 - PostgreSQL
 - React Router DOM
-- Semantic UI
+- Semantic UI, Material UI
 - Custom CSS
 
 ## Demo 
